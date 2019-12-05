@@ -6,16 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>Archives | Rochelle的博客</title>
+  <title>每日学习 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
-<meta name="keywords" content="Java,后端,开发者,程序媛,编程,代码">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rochelle的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;archives&#x2F;index.html">
+  <meta name="description" content="http协议、Response对象、ServletContext对象 HTTP协议：响应消息 Response对象 ServletContext对象">
+<meta name="keywords" content="Javaweb、http、Response对象、ServletContext对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日学习">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;05&#x2F;%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
+<meta property="og:description" content="http协议、Response对象、ServletContext对象 HTTP协议：响应消息 Response对象 ServletContext对象">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-05T13:18:57.814Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
@@ -154,36 +155,171 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-学习记录（19.12.05）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/">每日学习</a>
+    <h1 class="article-title" itemprop="name">
+      每日学习
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2019-12-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="http协议、Response对象、ServletContext对象"><a href="#http协议、Response对象、ServletContext对象" class="headerlink" title="http协议、Response对象、ServletContext对象"></a>http协议、Response对象、ServletContext对象</h2><ol>
+<li>HTTP协议：响应消息</li>
+<li>Response对象</li>
+<li>ServletContext对象</li>
+</ol>
+<a id="more"></a>
+<h3 id="HTTP协议："><a href="#HTTP协议：" class="headerlink" title="HTTP协议："></a>HTTP协议：</h3><ol>
+<li>请求消息：客户端发送给服务器端的数据<ul>
+<li>数据格式：<ol>
+<li>请求行</li>
+<li>请求头</li>
+<li>请求空行</li>
+<li>请求体</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>响应消息：服务器端发送给客户端的数据<ul>
+<li>响应行</li>
+<li>响应头</li>
+<li>响应空行</li>
+<li>响应体:传输的数据</li>
+</ul>
+</li>
+<li>响应状态码：服务器告诉客户端浏览器本次请求和响应的一个状态。<ul>
+<li>状态码都是3位数字 </li>
+<li>分类：<ol>
+<li>1xx：服务器就收客户端消息，但没有接受完成，等待一段时间后，发送1xx多状态码</li>
+<li>2xx：成功。代表：200</li>
+<li>3xx：重定向。代表：302(重定向)，304(访问缓存)</li>
+<li>4xx：客户端错误。<ul>
+<li>404（请求路径没有对应的资源） </li>
+<li>405：请求方式没有对应的doXxx方法</li>
+</ul>
+</li>
+<li>5xx：服务器端错误。代表：500(服务器内部出现异常)</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h3><ol>
+<li>功能：设置响应消息<ol>
+<li>设置响应行<ol>
+<li>格式：HTTP/1.1 200 ok</li>
+<li>设置状态码：setStatus(int sc) </li>
+</ol>
+</li>
+<li>设置响应头：setHeader(String name, String value)     </li>
+<li>设置响应体：<ul>
+<li>使用步骤：<ol>
+<li>获取输出流<ul>
+<li>字符输出流：PrintWriter getWriter()</li>
+<li>字节输出流：ServletOutputStream getOutputStream()</li>
+</ul>
+</li>
+<li>使用输出流，将数据输出到客户端浏览器</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>重定向的特点:redirect<ol>
+<li>地址栏发生变化</li>
+<li>重定向可以访问其他站点(服务器)的资源</li>
+<li>重定向是两次请求。不能使用request对象来共享数据</li>
+</ol>
+</li>
+<li>转发的特点：forward<ol>
+<li>转发地址栏路径不变</li>
+<li>转发只能访问当前服务器下的资源</li>
+<li>转发是一次请求，可以使用request对象来共享数据</li>
+</ol>
+</li>
+</ol>
+<h3 id="ServletContext对象："><a href="#ServletContext对象：" class="headerlink" title="ServletContext对象："></a>ServletContext对象：</h3><ol>
+<li>概念：代表整个web应用，可以和程序的容器(服务器)来通信</li>
+<li>获取：<ol>
+<li>通过request对象获取 request.getServletContext();</li>
+<li>通过HttpServlet获取 this.getServletContext();</li>
+</ol>
+</li>
+<li>功能：<ul>
+<li>获取MIME类型：<ul>
+<li>MIME类型:在互联网通信过程中定义的一种文件数据类型</li>
+<li>获取：String getMimeType(String file)  </li>
+</ul>
+</li>
+<li>域对象：共享数据<ol>
+<li>setAttribute(String name,Object value)</li>
+<li>getAttribute(String name)</li>
+<li>removeAttribute(String name)</li>
+<li>ServletContext对象范围：所有用户所有请求的数据</li>
+</ol>
+</li>
+<li>获取文件的真实(服务器)路径<ul>
+<li>方法：String getRealPath(String path)  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">String b = context.getRealPath(<span class="string">"/b.txt"</span>);<span class="comment">//web目录下资源访问</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   System.out.println(b);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   String c = context.getRealPath(<span class="string">"/WEB-INF/c.txt"</span>);<span class="comment">//WEB-INF目录下的资源访问</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   System.out.println(c);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">   String a = context.getRealPath(<span class="string">"/WEB-INF/classes/a.txt"</span>);<span class="comment">//src目录下的资源访问</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">   System.out.println(a);</span></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -195,7 +331,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -208,164 +344,137 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/04/hello-world/" class="archive-article-date">
-  	<time datetime="2019-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">大莹的第一篇博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/04/hello-world/">大莹的第一篇博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Hello</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/post//" class="article-tag-list-link color5">post</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#http协议、Response对象、ServletContext对象"><span class="toc-number">1.</span> <span class="toc-text">http协议、Response对象、ServletContext对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP协议："><span class="toc-number">1.1.</span> <span class="toc-text">HTTP协议：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Response对象"><span class="toc-number">1.2.</span> <span class="toc-text">Response对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ServletContext对象："><span class="toc-number">1.3.</span> <span class="toc-text">ServletContext对象：</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式的四种实现方式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/code//" class="article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/04/%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2019-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        </div>
-    	 
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="学习记录（19.12.05）" data-title="每日学习" data-url="https://rochellezsy.github.io/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/04/%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E6%95%B4%E7%90%86/">算法代码整理</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/code//" class="article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -388,8 +497,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
