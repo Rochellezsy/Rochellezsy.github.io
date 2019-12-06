@@ -6,21 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>Java NIO的学习理解 | Rochelle的博客</title>
+  <title>Java集合框架学习 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java NIO学习理解Java NIO 由以下几个核心部分组成：1、Buffer2、Channel3、Selector">
-<meta name="keywords" content="java nio">
+  <meta name="description" content="java集合框架学习概述Java提供了几个能有效地组织和操作数据的数据结构，这些数据结构通常称为Java集合框架。">
+<meta name="keywords" content="java、集合框架">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java NIO的学习理解">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;Java%20nio%E7%90%86%E8%A7%A3&#x2F;index.html">
+<meta property="og:title" content="Java集合框架学习">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="java NIO学习理解Java NIO 由以下几个核心部分组成：1、Buffer2、Channel3、Selector">
+<meta property="og:description" content="java集合框架学习概述Java提供了几个能有效地组织和操作数据的数据结构，这些数据结构通常称为Java集合框架。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;Java%20nio%E7%90%86%E8%A7%A3&#x2F;img&#x2F;1.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;笔记&#x2F;img&#x2F;2.png">
-<meta property="og:updated_time" content="2019-12-06T08:34:11.860Z">
+<meta property="og:updated_time" content="2019-12-06T14:06:55.947Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;Java%20nio%E7%90%86%E8%A7%A3&#x2F;img&#x2F;1.png">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
   
@@ -158,19 +155,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java nio理解" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-java集合框架学习" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java NIO的学习理解
+      Java集合框架学习
     </h1>
   
 
         
-        <a href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/" class="archive-article-date">
+        <a href="/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
   	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
 </a>
         
@@ -178,79 +175,87 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="java-NIO学习理解"><a href="#java-NIO学习理解" class="headerlink" title="java NIO学习理解"></a>java NIO学习理解</h2><p>Java NIO 由以下几个核心部分组成：<br>1、Buffer<br>2、Channel<br>3、Selector</p>
+        <h2 id="java集合框架学习"><a href="#java集合框架学习" class="headerlink" title="java集合框架学习"></a>java集合框架学习</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Java提供了几个能有效地组织和操作数据的数据结构，这些数据结构通常称为Java集合框架。</p>
 <a id="more"></a>
-<p>传统的IO操作面向数据流，面向流的 I/O 系统一次一个字节地处理数据，意味着每次从流中读一个或多个字节，直至完成，数据没有被缓存在任何地方。<br>NIO操作面向缓冲区（ 面向块），数据从Channel读取到Buffer缓冲区，随后在Buffer中处理数据。</p>
-<h3 id="Buffer（缓冲区）的理解"><a href="#Buffer（缓冲区）的理解" class="headerlink" title="Buffer（缓冲区）的理解"></a>Buffer（缓冲区）的理解</h3><p>Buffer是一个对象，它包含一些要写入或者刚读出的数据。==在面向流的 I/O 中，一般将数据直接写入或者将数据直接读到 Stream 对象中。<br>缓冲区实质上是一个数组。通常它是一个字节数组，内部维护几个状态变量，可以实现在同一块缓冲区上反复读写（不用清空数据再写）。</p>
-<h3 id="Buffer重要方法"><a href="#Buffer重要方法" class="headerlink" title="Buffer重要方法"></a>Buffer重要方法</h3><ul>
-<li><strong>mark()</strong>：把当前的position赋值给mark</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">mark</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    mark = position;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<ul>
-<li><strong>flip()</strong>：Buffer有两种模式，写模式和读模式，flip后Buffer从写模式变成读模式（设置状态变量值）。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">flip</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    limit = position;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    position = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    mark = -<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<ul>
-<li><strong>reset()</strong>：把mark值还原给position</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">reset</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> m = mark;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (m &lt; <span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> InvalidMarkException();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    position = m;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<ul>
-<li><strong>clear()</strong>：读完Buffer中的数据，需要让Buffer准备好再次被写入，clear会恢复状态值，但不会擦除数据。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">clear</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    position = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    limit = capacity;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    mark = -<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>rewind()</strong>：重置position为0，从头读写数据。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Buffer <span class="title">rewind</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    position = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    mark = -<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-
-<h3 id="Channel（通道）的理解"><a href="#Channel（通道）的理解" class="headerlink" title="Channel（通道）的理解"></a>Channel（通道）的理解</h3><p>Channel是一个对象，可以通过它读取和写入数据。<br>通常我们都是将数据写入包含一个或者多个字节的缓冲区，然后再将缓存区的数据写入到通道中，将数据从通道读入缓冲区，再从缓冲区获取数据。</p>
-<p>Channel类似于原I/O中的流（Stream），但有所区别：</p>
+<p>Java集合框架主要包括两种类型的容器，一种是集合（Collection），存储一个元素集合，另一种是图（Map），存储键/值对映射。</p>
+<p>Collection接口又有3种子类型，List、Set和Queue，再下面是一些抽象类，最后是具体实现类，常用的有ArrayList、LinkedList、HashSet、LinkedHashSet、HashMap、LinkedHashMap等等。</p>
+<h3 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h3><p>Collection接口是处理对象集合的根接口，其中定义了很多对元素进行操作的方法，AbstractCollection是提供Collection部分实现的抽象类。</p>
+<h4 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h4><p>List接口扩展自Collection，==它可以定义一个允许重复的有序集合==，从List接口中的方法来看，List接口主要是增加了面向位置的操作，允许在指定位置上操作元素，同时增加了一个能够双向遍历线性表的新列表迭代器ListIterator。AbstractList类提供了List接口的部分实现，AbstractSequentialList扩展自AbstractList，主要是提供对链表的支持。</p>
 <ol>
-<li>流是单向的，通道是双向的，可读可写。</li>
-<li>流读写是阻塞的，通道可以异步读写。</li>
+<li><p><strong>ArrayList</strong></p>
+<p>ArrayList的源码，我们可以很清楚地看到里面的逻辑，它是用数组存储元素的，这个数组可以动态创建，如果元素个数超过了数组的容量，那么就创建一个更大的新数组，并将当前数组中的所有元素都复制到新数组中。</p>
+</li>
+<li><p><strong>LinkedList</strong></p>
+<p>LinkedList的源文件，不难看到LinkedList是在一个链表中存储元素。所以，LinkedList的元素添加和删除其实就对应着链表节点的添加和移除。</p>
+</li>
 </ol>
-<p>目前Channel主要实现类有：</p>
+<h4 id="set接口"><a href="#set接口" class="headerlink" title="set接口"></a>set接口</h4><p>Set接口扩展自Collection，==它与List的不同之处在于，规定Set的实例不包含重复的元素。==AbstractSet是一个实现Set接口的抽象类，Set接口有三个具体实现类，分别是散列集HashSet、链式散列集LinkedHashSet和树形集TreeSet。</p>
 <ol>
-<li>FileChannel:是一个连接到文件的通道。可以通过文件通道读写文件。<ul>
-<li><strong>read:</strong>从文件中指定的位置开始读取数据到缓冲区</li>
-<li><strong>write:</strong>将缓冲区的数据写入文件，从文件指定处开始。</li>
-</ul>
+<li><p><strong>HashSet</strong></p>
+<p>散列集HashSet是一个用于实现Set接口的具体类，可以使用它的无参构造方法来创建空的散列集，也可以由一个现有的集合创建散列集。</p>
+<p>查看散列集HashSet的源码实现可以看到它内部是使用一个HashMap来存放元素的，因为HashSet的元素就是其内部HashMap的<strong>键集合</strong>，所以HashSet可以做到元素不重复。</p>
 </li>
-<li>DatagramChannel: 一个能收发 UDP 包的通道。它发送和接收的是数据包。</li>
-<li>SocketChannel: 是一个连接到 TCP 网络套接字的通道</li>
-<li>ServerSocketChannel: 是一个可以监听新进来的 TCP 连接的通道。</li>
+<li><p><strong>LinkedHashSet</strong></p>
+<p>LinkedHashSet是继承自HashSet的，支持对规则集内的元素排序。HashSet中的元素是没有被排序的，而LinkedHashSet中的元素可以按照它们插入规则集的顺序提取。</p>
+</li>
+<li><p><strong>TreeSet</strong></p>
+<p>TreeSet扩展自AbstractSet，并实现了NavigableSet，AbstractSet扩展自AbstractCollection，树形集是一个有序的Set，其底层是一颗树，这样就能从Set里面提取一个有序序列了。在实例化TreeSet时，我们可以给TreeSet指定一个比较器Comparator来指定树形集中的元素顺序。树形集中提供了很多便捷的方法。</p>
+</li>
 </ol>
-<h3 id="Selector（选择器-多路复用器）的理解（核心）"><a href="#Selector（选择器-多路复用器）的理解（核心）" class="headerlink" title="Selector（选择器/多路复用器）的理解（核心）"></a>Selector（选择器/多路复用器）的理解（核心）</h3><p>Selector 一般称为选择器 （或多路复用器）。</p>
-<p>它是Java NIO核心组件中的一个，用于检查一个或多个NIO Channel（通道）的状态是否处于可读、可写。可以实现<strong>单线程管理多个channels</strong>，也就是说可以管理多个网络连接。</p>
-<img src="img/1.png" style="zoom:50%;" />
-
-<p>为了使用 Selector, 我们首先需要将 Channel 注册到 Selector 中, 随后调用 Selector 的 select()方法, 这个方法会阻塞, 直到注册在 Selector 中的 Channel 发送可读写事件（或其它注册事件）. 当这个方法返回后, 当前的这个线程就可以处理 Channel 的事件了（已准备就绪的Channel）。</p>
-<ul>
-<li><p>创建Selector</p>
-<p>通过 Selector.open()方法, 我们可以创建一个选择器:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Selector selector = Selector.open();</span></pre></td></tr></table></figure>
+<h4 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h4><p>队列是一种先进先出的数据结构，元素在队列末尾添加，在队列头部删除。Queue接口扩展自Collection，并提供插入、提取、检验等操作。</p>
+<p>上图中，方法offer表示向队列添加一个元素，poll()与remove()方法都是移除队列头部的元素，两者的区别在于如果队列为空，那么poll()返回的是null，而remove()会抛出一个异常。方法element()与peek()主要是获取头部元素，不删除。</p>
+<p>接口Deque，是一个扩展自Queue的双端队列，它支持在两端插入和删除元素，因为LinkedList类实现了Deque接口，所以通常我们可以使用LinkedList来创建一个队列。PriorityQueue类实现了一个优先队列，优先队列中元素被赋予优先级，拥有高优先级的先被删除。</p>
+<h3 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h3><p>Map，图，是一种存储键值对映射的容器类，在Map中键可以是任意类型的对象，但不能有重复的键，每个键都对应一个值，真正存储在图中的是键值构成的条目。</p>
+<p>Map接口常用的有三个具体实现类，分别是HashMap、LinkedHashMap、TreeMap。</p>
+<p>在实际使用中，如果更新图时不需要保持图中元素的顺序，就使用HashMap，如果需要保持图中元素的插入顺序或者访问顺序，就使用LinkedHashMap，如果需要使图按照键值排序，就使用TreeMap。</p>
+<ol>
+<li><p><strong>HashMap</strong></p>
+<p>HashMap是基于哈希表的Map接口的非同步实现，继承自AbstractMap，AbstractMap是部分实现Map接口的抽象类。在平时的开发中，HashMap的使用还是比较多的。</p>
+<p><strong>HashMap采用数组+链表实现</strong>，即使用链表处理冲突，同一hash值的链表都存储在一个链表里。但是当链表中的元素较多，即hash值相等的元素较多时，通过key值依次查找的效率较低。而JDK1.8中，HashMap采用数组+链表+红黑树实现，当链表长度超过阈值（8）时，将链表转换为红黑树，这样大大减少了查找时间。</p>
+<p>==<strong>HashMap的实现原理：</strong>==首先有一个每个元素都是链表（可能表述不准确）的数组，当添加一个元素（key-value）时，就首先计算元素key的hash值，以此确定插入数组中的位置，但是可能存在同一hash值的元素已经被放在数组同一位置了，这时就添加到同一hash值的元素的后面，他们在数组的同一位置，但是形成了链表，所以说数组存放的是链表。而当链表长度太长时，链表就转换为红黑树，这样大大提高了查找的效率。</p>
 </li>
-<li><p>将 Channel注册到Selector 中</p>
-<p>需要将 Channel注册到Selector 中，这样才能通过 Selector 监控 Channel :</p>
-<p>因为 <strong>channel 是非阻塞</strong>的，因此当没有数据的时候会理解返回，因此实际上 Selector 是不断的在轮询其注册的 channel 是否有数据就绪。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//非阻塞模式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">channel.configureBlocking(<span class="keyword">false</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">SelectionKey key = channel.register(selector, SelectionKey.OP_READ);</span></pre></td></tr></table></figure>
+<li><p><strong>LinkedHashMap</strong></p>
+<p>LinkedHashMap继承自HashMap，它主要是用链表实现来扩展HashMap类，HashMap中条目是没有顺序的，但是在LinkedHashMap中元素既可以按照它们插入图的顺序排序，也可以按它们最后一次被访问的顺序排序。</p>
 </li>
-<li><p>调用 Selector 的 select()方法, 这个方法会<strong>阻塞</strong>, 直到注册在 Selector 中的 Channel 发送可读写事件（或其它注册事件）. 当这个方法返回后, 当前的这个线程就可以处理 Channel 的事件了（已准备就绪的Channel）.</p>
+<li><p><strong>TreeMap</strong></p>
+<p>TreeMap基于红黑树数据结构的实现，键值可以使用Comparable或Comparator接口来排序。TreeMap继承自AbstractMap，同时实现了接口NavigableMap，而接口NavigableMap则继承自SortedMap。SortedMap是Map的子接口，使用它可以确保图中的条目是排好序的。</p>
 </li>
-<li><p>当我们使用 register 注册一个 Channel 时, 会返回一个 SelectionKey 对象, 这个对象包含了如下内容:<br> interest set, 即我们感兴趣的事件集<br> ready set<br> channel<br> selector<br> attached object, 可选的附加对象</p>
+</ol>
+<h3 id="其它集合类"><a href="#其它集合类" class="headerlink" title="其它集合类"></a>其它集合类</h3><p>特殊的集合类，Vector、Stack、HashTable、ConcurrentHashMap以及CopyOnWriteArrayList</p>
+<ol>
+<li><p><strong>Vector</strong></p>
+<p>用法上，Vector与ArrayList基本一致，不同之处在于Vector使用了关键字synchronized将访问和修改向量的方法都变成同步的了，所以对于不需要同步的应用程序来说，类ArrayList比类Vector更高效。</p>
 </li>
-<li><p>如果 select()方法返回值表示有多个 Channel 准备好了, 那么我们可以通过 Selected key set 访问这个Channel:<br>注意, 在每次迭代时, 我们都调用 “keyIterator.remove()” 将这个 key 从迭代器中删除, 因为 select() 方法仅仅是简单地将就绪的 IO 操作放到 selectedKeys 集合中, 因此如果我们从 selectedKeys 获取到一个 key, 但是没有将它删除, 那么下一次 select 时, 这个 key 所对应的 IO 事件还在 selectedKeys 中.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Iterator&lt;SelectionKey&gt; keyIterator = selectedKeys.iterator();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(keyIterator.hasNext()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  SelectionKey key = keyIterator.next();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	keyIterator.remove();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="comment">//可能有多个注册事件就绪</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(key.isAcceptable()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// a connection was accepted by a ServerSocketChannel.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (key.isConnectable()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// a connection was established with a remote server.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (key.isReadable()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// a channel is ready for reading</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (key.isWritable()) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// a channel is ready for writing</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<li><p><strong>Stack</strong></p>
+<p>Stack，栈类，是Java2之前引入的，继承自类Vector。</p>
 </li>
-<li><p>选择器执行选择的过程，系统底层会依次询问每个通道是否已经就绪，这个过程可能会造成调用线程进入阻塞状态,wakeup方式可以唤醒在select（）方法中阻塞的线程。</p>
+<li><p><strong>Hashtable</strong></p>
+<p>Hashtable和前面介绍的HashMap很类似，它也是一个散列表，存储的内容是键值对映射，不同之处在于，Hashtable是继承自Dictionary的，Hashtable中的函数都是同步的，这意味着它也是线程安全的，另外，Hashtable中key和value都不可以为null。</p>
+</li>
+</ol>
+<p>上面的三个集合类都是在Java2之前推出的容器类，可以看到，尽管在使用中效率比较低，但是它们都是线程安全的。下面介绍两个特殊的集合类。</p>
+<ol start="4">
+<li><p><strong>ConcurrentHashMap</strong></p>
+<p>Concurrent并发，从名字就可以看出来ConcurrentHashMap是HashMap的线程安全版。同HashMap相比，ConcurrentHashMap不仅保证了访问的线程安全性，而且在效率上与HashTable相比，也有较大的提高。</p>
+</li>
+<li><p><strong>CopyOnWriteArrayList</strong></p>
+<p>CopyOnWriteArrayList，是一个线程安全的List接口的实现，它使用了ReentrantLock锁来保证在并发情况下提供高性能的并发读取。</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li><p>Java集合框架主要包括Collection和Map两种类型。其中Collection又有3种子类型，分别是List、Set、Queue。Map中存储的主要是键值对映射。</p>
+</li>
+<li><p>规则集Set中存储的是不重复的元素，线性表中存储可以包括重复的元素，Queue队列描述的是先进先出的数据结构，可以用LinkedList来实现队列。</p>
+</li>
+<li><p>效率上，规则集比线性表更高效。</p>
+</li>
+<li><p>ArrayList主要是用数组来存储元素，LinkedList主要是用链表来存储元素，HashMap的底层实现主要是借助数组+链表+红黑树来实现。</p>
+</li>
+<li><p>Vector、Hashtable等集合类效率比较低但都是线程安全的。包java.util.concurrent下包含了大量线程安全的集合类，效率上有较大提升。</p>
 </li>
 </ul>
-<h4 id="Selector使用流程"><a href="#Selector使用流程" class="headerlink" title="Selector使用流程"></a>Selector使用流程</h4><p>1、建立 ServerSocketChannel<br>2、通过 Selector.open() 打开一个 Selector.<br>3、将 Channel 注册到 Selector 中, 并设置需要监听的事件<br>4、循环:<br>    1、调用 select() 方法<br>    2、调用 selector.selectedKeys() 获取 就绪 Channel<br>    3、迭代每个 selected key:<br><img src="/Users/zhoushiying/Desktop/笔记/img/2.png" style="zoom:50%;" /></p>
-<h2 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h2><p>Java NIO 由Buffer、Channel以及Selector这三个核心部分组成。</p>
-<p>在面向流的 I/O 中，一般将数据直接写入或者将数据直接读到 Stream 对象中。NIO操作面向缓冲区（ 面向块），数据从Channel读取到Buffer缓冲区，随后在Buffer中处理数据。</p>
-<p>Buffer 是缓冲区， 它包含一些要写入或者刚读出的数据。Channel是通道，通过它读取和写入数据。Selector为选择器（或多路复用器），是Java NIO核心组件中的一个，用于检查一个或多个NIO Channel（通道）的状态是否处于可读、可写。可以实现单线程管理多个channels，也就是说可以管理多个网络连接。</p>
-<p>为了使用 Selector, 我们首先需要将 Channel 注册到 Selector 中, 随后调用 Selector 的 select()方法, 这个方法会阻塞, 直到注册在 Selector 中的 Channel 发送可读写事件（或其它注册事件），当这个方法返回后（ select()方法返回值表示有多个 Channel 准备好了, 那么我们可以通过 Selected key set 访问这个 Channel），当前的这个线程就可以处理 Channel 的事件了（已准备就绪的Channel）。</p>
+<p>参考：</p>
+<p><a href="https://www.jianshu.com/p/63e76826e852" target="_blank" rel="noopener">Java - 集合框架完全解析</a></p>
 
       
 
@@ -307,7 +312,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/IO//" class="article-tag-list-link color3">IO</a>
+        			<a href="/categories/集合框架//" class="article-tag-list-link color5">集合框架</a>
         		</li>
       		
 		</ul>
@@ -362,7 +367,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -376,9 +381,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java NIO的学习理解
+        
+      </div>
+    </a>
   
-    <a href="/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java集合框架学习</div>
+  
+    <a href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">死锁问题整理</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -405,7 +419,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#java-NIO学习理解"><span class="toc-number">1.</span> <span class="toc-text">java NIO学习理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer（缓冲区）的理解"><span class="toc-number">1.1.</span> <span class="toc-text">Buffer（缓冲区）的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer重要方法"><span class="toc-number">1.2.</span> <span class="toc-text">Buffer重要方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channel（通道）的理解"><span class="toc-number">1.3.</span> <span class="toc-text">Channel（通道）的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Selector（选择器-多路复用器）的理解（核心）"><span class="toc-number">1.4.</span> <span class="toc-text">Selector（选择器/多路复用器）的理解（核心）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Selector使用流程"><span class="toc-number">1.4.1.</span> <span class="toc-text">Selector使用流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#学习总结"><span class="toc-number">2.</span> <span class="toc-text">学习总结</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#java集合框架学习"><span class="toc-number">1.</span> <span class="toc-text">java集合框架学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection接口"><span class="toc-number">1.2.</span> <span class="toc-text">Collection接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#List接口"><span class="toc-number">1.2.1.</span> <span class="toc-text">List接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set接口"><span class="toc-number">1.2.2.</span> <span class="toc-text">set接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Queue"><span class="toc-number">1.2.3.</span> <span class="toc-text">Queue</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map接口"><span class="toc-number">1.3.</span> <span class="toc-text">Map接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其它集合类"><span class="toc-number">1.4.</span> <span class="toc-text">其它集合类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.5.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -419,7 +433,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Java nio理解" data-title="Java NIO的学习理解" data-url="https://rochellezsy.github.io/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/"></div>
+	<div class="ds-thread" data-thread-key="java集合框架学习" data-title="Java集合框架学习" data-url="https://rochellezsy.github.io/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
