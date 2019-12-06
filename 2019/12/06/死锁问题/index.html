@@ -6,16 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>Tag: java学习 | Rochelle的博客</title>
+  <title>死锁问题整理 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
-<meta name="keywords" content="Java,后端,开发者,程序媛,编程,代码">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rochelle的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;tags&#x2F;java%E5%AD%A6%E4%B9%A0&#x2F;index.html">
+  <meta name="description" content="死锁问题什么是线程死锁线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。">
+<meta name="keywords" content="死锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="死锁问题整理">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
+<meta property="og:description" content="死锁问题什么是线程死锁线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-06T12:31:21.573Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
@@ -154,36 +155,101 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-死锁问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/">Java NIO的学习理解</a>
+    <h1 class="article-title" itemprop="name">
+      死锁问题整理
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题"></a>死锁问题</h1><h2 id="什么是线程死锁"><a href="#什么是线程死锁" class="headerlink" title="什么是线程死锁"></a>什么是线程死锁</h2><p>线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。</p>
+<a id="more"></a>
+
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>场景一：</p>
+<p>星期日早上十点半，你在公路上开车，这是一条窄路，只能容纳一辆车。这时，迎面又驶来一辆车，你们都走到一半，谁也不想倒回去，于是各不相让，陷入无尽的等待。</p>
+<p>场景二：</p>
+<p>你有两个线程 A 和 B ，各自在加锁的状态下运行。A 持有一部分资源，并且等待 B 线程中的资源以完成自己的工作，而此时 B 线程也在等待 A 中的资源以完成自己的工作。由于他们都是锁定状态，所以他们必须完成了自己的工作后，自己持有的资源才能释放。于是线程无休止地等待，导致死锁。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaTest</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">final</span> Object lockA = <span class="keyword">new</span> Object();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">final</span> Object lockB = <span class="keyword">new</span> Object();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">synchronized</span> (lockA) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">try</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                        Thread.sleep(<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                        e.printStackTrace();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">synchronized</span> (lockB) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                    System.out.println(<span class="string">"finish A"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        &#125;).start();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">synchronized</span> (lockB) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">try</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">                        Thread.sleep(<span class="number">1000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">                        e.printStackTrace();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">synchronized</span> (lockA) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">                    System.out.println(<span class="string">"finish B"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &#125;).start();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">try</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">            Thread.sleep(<span class="number">10000</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">            e.printStackTrace();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>此程序中，线程 A 持有 lockA 对象，并请求 lockB 对象；线程 B 持有 lockB 对象，并请求 lockA 对象。由于他们都在等待对方释放资源，所以会产生死锁。运行程序，将发现控制台无法打印出 “finish A” 和 “finish B” 消息。</p>
+<h2 id="产生死锁的四个条件"><a href="#产生死锁的四个条件" class="headerlink" title="产生死锁的四个条件"></a>产生死锁的四个条件</h2><ol>
+<li><strong>互斥条件</strong>：一个资源每次只能被一个进程使用；</li>
+<li><strong>请求与保持条件</strong>：一个进程因请求资源而阻塞时，对已获得的资源保持不放；</li>
+<li><strong>不可抢占条件</strong>：进程已获得的资源，在没使用完之前，不能强行剥夺；</li>
+<li><strong>循环等待条件</strong>：多个进程之间形成一种互相循环等待资源的关系。</li>
+</ol>
+<h2 id="如何预防线程死锁"><a href="#如何预防线程死锁" class="headerlink" title="如何预防线程死锁"></a>如何预防线程死锁</h2><p>预防死锁的方法是通过破坏死锁的四个必要条件中的一个或几个，以避免发生死锁。</p>
+<ol>
+<li><p><strong>破坏不可抢占条件</strong>：让对面的司机放弃了自己已有的资源。</p>
+</li>
+<li><p><strong>破坏请求与保持条件</strong>：在自己需要的材料缺少时，主动放弃自己持有的资源，防止出现互相等待。</p>
+</li>
+<li><p><strong>破坏循环等待条件</strong>：由于筷子指定了编号和获取规则，所以每个锁定状态都将按照顺序执行，于是便杜绝了环路等待条件。</p>
+</li>
+<li><p><strong>破坏互斥条件</strong>：由于每次使用时都拷贝一份，所以一个资源可以被多个进程使用。</p>
+</li>
+</ol>
+<h2 id="如何避免线程死锁"><a href="#如何避免线程死锁" class="headerlink" title="如何避免线程死锁"></a>如何避免线程死锁</h2><p>在死锁避免方法中，系统有两种状态：安全状态和不安全状态；当系统处于安全状态时，可以避免进入死锁；当系统处于不安全状态时，有可能进入死锁；避免死锁的基本思想就是确保系统始终处于安全状态。</p>
+<p>当有进程请求一个可用资源时，系统需要对该进程的请求进行计算，如果将资源分配给进程之后，系统仍然处于安全状态，那么该资源才可以分配给进程；否则不进行分配；</p>
+<p>避免死锁的最有代表性的算法就是艾兹格·迪杰斯特拉在 1965 年设计的银行家算法，通过记录系统中的资源向量、最大需求矩阵、分配矩阵、需求矩阵，以保证系统只在安全状态下进行资源分配，由此来避免死锁。</p>
+<h2 id="死锁的检测和接触"><a href="#死锁的检测和接触" class="headerlink" title="死锁的检测和接触"></a>死锁的检测和接触</h2><h4 id="死锁的检测"><a href="#死锁的检测" class="headerlink" title="死锁的检测"></a>死锁的检测</h4><p>为实现死锁检测算法，需要系统记录各种资源的使用情况以及进程对资源的请求情况，并且系统需要能根据这些信息检测系统是否进入死锁状态；一种常见的死锁检测方法是利用资源分配图。</p>
+<h4 id="死锁的解除"><a href="#死锁的解除" class="headerlink" title="死锁的解除"></a>死锁的解除</h4><p>死锁解除常使用两种方法：抢占资源和终止进程；</p>
+<p>一种最小代价的死锁解除算法是：对于死锁状态的每一个进程，都计算一遍终止该进程所产生的代价，然后选择代价最小的一个进程终止，然后如果系统还处于死锁，那么重复前一个步骤；但是计算选择代价最小的进程这一步骤可能会有较大的代价！</p>
+<p>参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/78135409" target="_blank" rel="noopener">4 个生活场景详解 BAT 面试中的死锁问题</a></p>
+<p><a href="https://blog.csdn.net/slx3320612540/article/details/80778273" target="_blank" rel="noopener">操作系统之死锁概述</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -195,56 +261,7 @@
 		</ul>
 	</div>
 
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/IO//" class="article-tag-list-link color3">IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/">死锁问题整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -257,17 +274,146 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java NIO的学习理解
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">每日学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#死锁问题"><span class="toc-number">1.</span> <span class="toc-text">死锁问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是线程死锁"><span class="toc-number">1.1.</span> <span class="toc-text">什么是线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.2.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产生死锁的四个条件"><span class="toc-number">1.3.</span> <span class="toc-text">产生死锁的四个条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何预防线程死锁"><span class="toc-number">1.4.</span> <span class="toc-text">如何预防线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何避免线程死锁"><span class="toc-number">1.5.</span> <span class="toc-text">如何避免线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#死锁的检测和接触"><span class="toc-number">1.6.</span> <span class="toc-text">死锁的检测和接触</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁的检测"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">死锁的检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁的解除"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">死锁的解除</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="死锁问题" data-title="死锁问题整理" data-url="https://rochellezsy.github.io/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -290,9 +436,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
