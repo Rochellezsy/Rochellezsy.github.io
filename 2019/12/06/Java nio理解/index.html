@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
   <title>Java NIO的学习理解 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java NIO学习理解Java NIO 由以下几个核心部分组成：1、Buffer2、Channel3、Selector 传统的IO操作面向数据流，面向流的 I&#x2F;O 系统一次一个字节地处理数据，意味着每次从流中读一个或多个字节，直至完成，数据没有被缓存在任何地方。NIO操作面向缓冲区（ 面向块），数据从Channel读取到Buffer缓冲区，随后在Buffer中处理数据。 Buffer（缓冲区）的">
+  <meta name="description" content="java NIO学习理解Java NIO 由以下几个核心部分组成：1、Buffer2、Channel3、Selector">
 <meta name="keywords" content="java nio">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java NIO的学习理解">
 <meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;Java%20nio%E7%90%86%E8%A7%A3&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="java NIO学习理解Java NIO 由以下几个核心部分组成：1、Buffer2、Channel3、Selector 传统的IO操作面向数据流，面向流的 I&#x2F;O 系统一次一个字节地处理数据，意味着每次从流中读一个或多个字节，直至完成，数据没有被缓存在任何地方。NIO操作面向缓冲区（ 面向块），数据从Channel读取到Buffer缓冲区，随后在Buffer中处理数据。 Buffer（缓冲区）的">
+<meta property="og:description" content="java NIO学习理解Java NIO 由以下几个核心部分组成：1、Buffer2、Channel3、Selector">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;Java%20nio%E7%90%86%E8%A7%A3&#x2F;img&#x2F;1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;笔记&#x2F;img&#x2F;2.png">
-<meta property="og:updated_time" content="2019-12-06T08:27:07.180Z">
+<meta property="og:updated_time" content="2019-12-06T08:34:11.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;Java%20nio%E7%90%86%E8%A7%A3&#x2F;img&#x2F;1.png">
   
@@ -179,6 +179,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="java-NIO学习理解"><a href="#java-NIO学习理解" class="headerlink" title="java NIO学习理解"></a>java NIO学习理解</h2><p>Java NIO 由以下几个核心部分组成：<br>1、Buffer<br>2、Channel<br>3、Selector</p>
+<a id="more"></a>
 <p>传统的IO操作面向数据流，面向流的 I/O 系统一次一个字节地处理数据，意味着每次从流中读一个或多个字节，直至完成，数据没有被缓存在任何地方。<br>NIO操作面向缓冲区（ 面向块），数据从Channel读取到Buffer缓冲区，随后在Buffer中处理数据。</p>
 <h3 id="Buffer（缓冲区）的理解"><a href="#Buffer（缓冲区）的理解" class="headerlink" title="Buffer（缓冲区）的理解"></a>Buffer（缓冲区）的理解</h3><p>Buffer是一个对象，它包含一些要写入或者刚读出的数据。==在面向流的 I/O 中，一般将数据直接写入或者将数据直接读到 Stream 对象中。<br>缓冲区实质上是一个数组。通常它是一个字节数组，内部维护几个状态变量，可以实现在同一块缓冲区上反复读写（不用清空数据再写）。</p>
 <h3 id="Buffer重要方法"><a href="#Buffer重要方法" class="headerlink" title="Buffer重要方法"></a>Buffer重要方法</h3><ul>
