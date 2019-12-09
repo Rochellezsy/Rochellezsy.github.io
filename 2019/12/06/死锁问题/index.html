@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
   <title>死锁问题整理 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="死锁问题什么是线程死锁线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。">
+  <meta name="description" content="什么是线程死锁线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。">
 <meta name="keywords" content="死锁">
 <meta property="og:type" content="article">
 <meta property="og:title" content="死锁问题整理">
 <meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;06&#x2F;%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="死锁问题什么是线程死锁线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。">
+<meta property="og:description" content="什么是线程死锁线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-06T12:31:21.573Z">
+<meta property="og:updated_time" content="2019-12-09T01:49:29.959Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
@@ -175,7 +175,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题"></a>死锁问题</h1><h2 id="什么是线程死锁"><a href="#什么是线程死锁" class="headerlink" title="什么是线程死锁"></a>什么是线程死锁</h2><p>线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。</p>
+        <h2 id="什么是线程死锁"><a href="#什么是线程死锁" class="headerlink" title="什么是线程死锁"></a>什么是线程死锁</h2><p>线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。</p>
 <a id="more"></a>
 
 <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>场景一：</p>
@@ -374,7 +374,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#死锁问题"><span class="toc-number">1.</span> <span class="toc-text">死锁问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是线程死锁"><span class="toc-number">1.1.</span> <span class="toc-text">什么是线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">1.2.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产生死锁的四个条件"><span class="toc-number">1.3.</span> <span class="toc-text">产生死锁的四个条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何预防线程死锁"><span class="toc-number">1.4.</span> <span class="toc-text">如何预防线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何避免线程死锁"><span class="toc-number">1.5.</span> <span class="toc-text">如何避免线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#死锁的检测和接触"><span class="toc-number">1.6.</span> <span class="toc-text">死锁的检测和接触</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁的检测"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">死锁的检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁的解除"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">死锁的解除</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是线程死锁"><span class="toc-number">1.</span> <span class="toc-text">什么是线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#场景"><span class="toc-number">2.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产生死锁的四个条件"><span class="toc-number">3.</span> <span class="toc-text">产生死锁的四个条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何预防线程死锁"><span class="toc-number">4.</span> <span class="toc-text">如何预防线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何避免线程死锁"><span class="toc-number">5.</span> <span class="toc-text">如何避免线程死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#死锁的检测和接触"><span class="toc-number">6.</span> <span class="toc-text">死锁的检测和接触</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁的检测"><span class="toc-number">6.0.1.</span> <span class="toc-text">死锁的检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁的解除"><span class="toc-number">6.0.2.</span> <span class="toc-text">死锁的解除</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
