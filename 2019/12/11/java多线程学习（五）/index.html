@@ -6,16 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>Rochelle的博客</title>
+  <title>java多线程学习(五)——上下文切换、避免死锁、解决资源限制 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
-<meta name="keywords" content="Java,后端,开发者,程序媛,编程,代码">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rochelle的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;index.html">
+  <meta name="description" content="一、并发的目的以及会遇到的问题并发编程的目的就是为了能提高程序的执行效率提高程序运行速度，但是并发编程并不总是能提高程序运行速度的，而且并发编程可能会遇到很多问题，比如：内存泄漏、上下文切换、死锁还有受限于硬件和软件的资源闲置问题。">
+<meta name="keywords" content="多线程、上下文切换、避免死锁、解决资源限制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java多线程学习(五)——上下文切换、避免死锁、解决资源限制">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;11&#x2F;java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
+<meta property="og:description" content="一、并发的目的以及会遇到的问题并发编程的目的就是为了能提高程序的执行效率提高程序运行速度，但是并发编程并不总是能提高程序运行速度的，而且并发编程可能会遇到很多问题，比如：内存泄漏、上下文切换、死锁还有受限于硬件和软件的资源闲置问题。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-11T13:19:54.289Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
@@ -154,16 +155,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-java多线程学习（五）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-java多线程学习（五）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/">java多线程学习(五)——上下文切换、避免死锁、解决资源限制</a>
+    <h1 class="article-title" itemprop="name">
+      java多线程学习(五)——上下文切换、避免死锁、解决资源限制
     </h1>
   
 
@@ -177,9 +176,92 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一、并发的目的以及会遇到的问题"><a href="#一、并发的目的以及会遇到的问题" class="headerlink" title="一、并发的目的以及会遇到的问题"></a>一、并发的目的以及会遇到的问题</h2><p>并发编程的目的就是为了能提高程序的执行效率提高程序运行速度，但是并发编程并不总是能提高程序运行速度的，而且并发编程可能会遇到很多问题，比如：内存泄漏、上下文切换、死锁还有受限于硬件和软件的资源闲置问题。</p>
-        
+<a id="more"></a>
+<p>多线程就是几乎同时执行多个线程（一个处理器在某一个时间点上永远都只能是一个线程！即使这个处理器是多核的，除非有多个处理器才能实现多个线程同时运行）<strong>。CPU通过给每个线程分配CPU时间片来实现伪同时运行</strong>，因为CPU时间片一般很短很短，所以给人一种同时运行的感觉。</p>
+<h2 id="二、上下文切换"><a href="#二、上下文切换" class="headerlink" title="二、上下文切换"></a>二、上下文切换</h2><p>当前任务在执行完CPU时间片切换到另一个任务之前会先保存自己的状态，以便下次再切换会这个任务时，可以再加载这个任务的状态。<strong>任务从保存到再加载的过程就是一次上下文切换</strong>。</p>
+<p>上下文切换通常是计算密集型的。也就是说，它需要相当可观的处理器时间，在每秒几十上百次的切换中，每次切换都需要纳秒量级的时间。所以，<strong>上下文切换对系统来说意味着消耗大量的 CPU 时间</strong>，事实上，可能是操作系统中时间消耗最大的操作。 Linux相比与其他操作系统（包括其他类 Unix 系统）有很多的优点，其中有一项就是，其上下文切换和模式切换的时间消耗非常少。</p>
+<p><strong>减少上下文切换</strong></p>
+<p>上下文切换又分为2种：<strong>让步式上下文切换</strong>和<strong>抢占式上下文切换</strong>。前者是指执行线程主动释放CPU，与锁竞争严重程度成正比，可通过<strong>减少锁竞争</strong>和使用<strong>CAS算法</strong>来避免；后者是指线程因分配的时间片用尽而被迫放弃CPU或者被其他优先级更高的线程所抢占，一般由于线程数大于CPU可用核心数引起，可通过<strong>适当减少线程数</strong>和<strong>使用协程</strong>来避免。</p>
+<p><strong>总结一下：</strong></p>
+<ol>
+<li><strong>减少锁的使用</strong>。因为多线程竞争锁时会引起上下文切换。</li>
+<li><strong>使用CAS算法</strong>。这种算法也是为了减少锁的使用。CAS算法是一种无锁算法。</li>
+<li><strong>减少线程的使用</strong>。人物很少的时候创建大量线程会导致大量线程都处于等待状态。</li>
+<li><strong>使用协程</strong>。</li>
+</ol>
+<p><strong>CAS算法</strong></p>
+<blockquote>
+<p>CAS（比较与交换，Compare and swap） 是一种有名的无锁算法。无锁编程，即不使用锁的情况下实现多线程之间的变量同步，也就是在没有线程被阻塞的情况下实现变量的同步，所以也叫非阻塞同步（Non-blocking Synchronization）。实现非阻塞同步的方案称为“无锁编程算法”（ Non-blocking algorithm）。 相对应的，独占锁是一种悲观锁，synchronized就是一种独占锁，它假设最坏的情况，并且只有在确保其它线程不会造成干扰的情况下执行，会导致其它所有需要锁的线程挂起，等待持有锁的线程释放锁。</p>
+</blockquote>
+<p><strong>协程</strong></p>
+<blockquote>
+<p>协程也可以说是微线程或者说是轻量级的线程，它占用的内存更少并且更灵活。很多编程语言中都有协程。Lua, Ruby 等等都有自己的协程实现。Go完全就是因为协程而发展壮大的。维基百科上面并没有Java实现协程的方式，但是不代表Java不能实现协程。比如可以使用Java实现的开源协程库：Quasar。Quasar官网：<a href="http://www.paralleluniverse.co/quasar/" target="_blank" rel="noopener">www.paralleluniverse.co/quasar/</a>，。这个库实现了一种可以和Go语言中的Goroutine相对标的编程概念：Fiber。Fiber是一种真正的协程。</p>
+</blockquote>
+<h2 id="三、避免死锁"><a href="#三、避免死锁" class="headerlink" title="三、避免死锁"></a>三、避免死锁</h2><p>在操作系统中，死锁是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</p>
+<p>在线程中，如果两个线程同时等待对方释放锁也会产生死锁。</p>
+<p>锁是一个好东西，但是使用不当就会造成死锁。一旦死锁产生程序就无法继续运行下去。所以如何避免死锁的产生，在我们使用并发编程时至关重要。</p>
+<p>根据《Java并发编程的艺术》有下面四种避免死锁的常见方法：</p>
+<ul>
+<li>避免一个线程同时获得多个锁</li>
+<li>避免一个线程在锁内同时占用多个资源，尽量保证每个锁只占用一个资源</li>
+<li>尝试使用定时锁，使用lock.tryLock(timeout)来替代使用内部锁机制</li>
+<li>对于数据库锁，加锁和解锁必须在一个数据库连接里，否则会出现解锁失败的情况</li>
+</ul>
+<h2 id="四、解决资源限制"><a href="#四、解决资源限制" class="headerlink" title="四、解决资源限制"></a>四、解决资源限制</h2><p><strong>什么是资源限制？？？</strong></p>
+<blockquote>
+<p>所谓资源限制就是我们在进行并发编程时，程序的运行速度受限于计算机硬件资源比如CPU,内存等等或软件资源比如软件的质量、性能等等。举个例子：如果说服务器的带宽只有2MB/s，某个资源的下载速度是1MB/s，系统启动10个线程下载该资源并不会导致下载速度编程10MB/s，所以在并发编程时，需要考虑这些资源的限制。硬件资源限制有：带宽的上传和下载速度、硬盘读写速度和CPU处理速度；软件资源限制有数据库的连接数、socket连接数、软件质量和性能等等。</p>
+</blockquote>
+<p><strong>资源限制引发的问题</strong></p>
+<blockquote>
+<p>在并发编程中，程序运行加快的原因是运行方式从串行运行变为并发运行，但是如果如果某段程序的并发执行由于资源限制仍然在串行执行的话，这时候程序的运行不仅不会加快，反而会更慢，因为可能增加了上下文切换和资源调度的时间。</p>
+</blockquote>
+<p><strong>如何解决资源限制的问题</strong></p>
+<blockquote>
+<p>对于硬件资源限制，可以考虑使用集群并行执行程序。既然单机的资源有限制，那么就让程序在多机上运行。比如使用Hadoop或者自己搭建服务器集群。</p>
+</blockquote>
+<blockquote>
+<p>对于软件资源的限制，可以考虑使用资源池将资源复用。比如使用连接池将数据库和Socket复用，或者在调用对方webservice接口获取数据时，只建立一个连接。另外还可以考虑使用良好的开源软件。</p>
+</blockquote>
+<p><strong>在资源限制的情况下如何进行并发编程</strong></p>
+<blockquote>
+<p>根据不同的资源限制调整程序的并发度，比如下载文件程序依赖于两个资源-带宽和硬盘读写速度。有数据库操作时，设计数据库练连接数，如果SQL语句执行非常快，而线程的数量比数据库连接数大很多，则某些线程会被阻塞，等待数据库连接。</p>
+</blockquote>
+<p>参考：</p>
+<p><a href="https://juejin.im/post/5ac884d85188251fc329854d" target="_blank" rel="noopener">Java多线程学习（七）并发编程中一些问题</a></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -210,16 +292,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java多线程学习(四)——管道输入/输出流、join()、ThreadLocal、lock接口</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -234,613 +375,52 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java多线程学习（四）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/">java多线程学习(四)——管道输入/输出流、join()、ThreadLocal、lock接口</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通过之前几章的学习已经知道在<strong>线程间通信</strong>用到的synchronized关键字、volatile关键字以及等待/通知（wait/notify）机制。今天讲一下线程间通信的其他知识点：管道输入/输出流、Thread.join()的使用、ThreadLocal的使用。并学习Lock接口。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、并发的目的以及会遇到的问题"><span class="toc-number">1.</span> <span class="toc-text">一、并发的目的以及会遇到的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、上下文切换"><span class="toc-number">2.</span> <span class="toc-text">二、上下文切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、避免死锁"><span class="toc-number">3.</span> <span class="toc-text">三、避免死锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、解决资源限制"><span class="toc-number">4.</span> <span class="toc-text">四、解决资源限制</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-java多线程学习（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">java多线程学习(三)——volatile、等待/通知（wait/notify）机制</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、volatile关键字"><a href="#一、volatile关键字" class="headerlink" title="一、volatile关键字"></a>一、volatile关键字</h2><p>把变量声明为 <strong>volatile</strong>，这就指示 JVM，这个变量是不稳定的，每次使用它都到主存中进行读取。</p>
-<h3 id="1-1-volatile关键字的可见性"><a href="#1-1-volatile关键字的可见性" class="headerlink" title="1.1 volatile关键字的可见性"></a>1.1 volatile关键字的可见性</h3><p><strong>volatile 修饰的成员变量</strong>在每次被线程访问时，都强迫<strong>从主存（共享内存）中重读该成员变量的值</strong>。而且，当成员变量发生变化时，<strong>强迫线程将变化值回写到主存（共享内存）</strong>。这样在任何时刻，<strong>两个不同的线程总是看到某个成员变量的同一个值</strong>，这样也就保证了同步数据的<strong>可见性</strong>。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java多线程学习（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">java多线程学习(二)——Thread、synchronsized关键字</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、Thread类的方法使用"><a href="#一、Thread类的方法使用" class="headerlink" title="一、Thread类的方法使用"></a>一、Thread类的方法使用</h2><h3 id="1-1-currentThread-方法"><a href="#1-1-currentThread-方法" class="headerlink" title="1.1 currentThread()方法"></a>1.1 currentThread()方法</h3><p>currentThread()方法可以返回代码被那个线程调用的信息。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java多线程学习（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/09/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">java多线程学习(一)——进程线程</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/09/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、进程和线程概念"><a href="#一、进程和线程概念" class="headerlink" title="一、进程和线程概念"></a>一、进程和线程概念</h2><h3 id="1-1-进程和线程"><a href="#1-1-进程和线程" class="headerlink" title="1.1 进程和线程"></a>1.1 进程和线程</h3><p><strong>线程</strong>：线程与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享同一块内存空间和一组系统资源，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/09/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java nio理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/">Java NIO的学习理解</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Java NIO 由以下几个核心部分组成：<br>1、Buffer<br>2、Channel<br>3、Selector</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/IO//" class="article-tag-list-link color3">IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java集合框架学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/">Java集合框架学习</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Java提供了几个能有效地组织和操作数据的数据结构，这些数据结构通常称为Java集合框架。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/集合框架//" class="article-tag-list-link color5">集合框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-死锁问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/">死锁问题整理</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="什么是线程死锁"><a href="#什么是线程死锁" class="headerlink" title="什么是线程死锁"></a>什么是线程死锁</h2><p>线程死锁是指由于两个或者多个线程互相持有对方所需要的资源，导致这些线程处于等待状态，无法前往执行。当线程进入对象的 synchronized 代码块时，便占有了资源，直到它退出该代码块或者调用 wait 方法，才释放资源，在此期间，其他线程将不能进入该代码块。当线程互相持有对方所需要的资源时，会互相等待对方释放资源，如果线程都不主动释放所占有的资源，将产生死锁。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/死锁//" class="article-tag-list-link color3">死锁</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java多线程学习（五）" data-title="java多线程学习(五)——上下文切换、避免死锁、解决资源限制" data-url="https://rochellezsy.github.io/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -863,8 +443,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
