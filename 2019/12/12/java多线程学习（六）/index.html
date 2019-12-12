@@ -6,17 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>Archives | Rochelle的博客</title>
+  <title>java多线程学习(六)——线程池、Executor | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
-<meta name="keywords" content="Java,后端,开发者,程序媛,编程,代码">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rochelle的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;archives&#x2F;index.html">
+  <meta name="description" content="一、使用线程池的好处线程池提供了一种限制和管理资源（包括执行一个任务）。 每个线程池还维护一些基本统计信息，例如已完成任务的数量。 这里借用《Java并发编程的艺术》提到的来说一下使用线程池的好处： 降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。">
+<meta name="keywords" content="多线程、线程池、Executor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java多线程学习(六)——线程池、Executor">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2019&#x2F;12&#x2F;12&#x2F;java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="我是周诗莹，一名学生，正在读研中，浙江大学18级，渴望成为一名大牛的程序媛，在这里记录下我的生活和学习。">
+<meta property="og:description" content="一、使用线程池的好处线程池提供了一种限制和管理资源（包括执行一个任务）。 每个线程池还维护一些基本统计信息，例如已完成任务的数量。 这里借用《Java并发编程的艺术》提到的来说一下使用线程池的好处： 降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;%E7%AC%94%E8%AE%B0&#x2F;img&#x2F;6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;笔记&#x2F;img&#x2F;7.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;笔记&#x2F;img&#x2F;8.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;%E7%AC%94%E8%AE%B0&#x2F;img&#x2F;9.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;笔记&#x2F;img&#x2F;10.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Library&#x2F;Application%20Support&#x2F;typora-user-images&#x2F;image-20191212093720331.png">
+<meta property="og:updated_time" content="2019-12-12T08:19:57.823Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;Users&#x2F;zhoushiying&#x2F;Desktop&#x2F;%E7%AC%94%E8%AE%B0&#x2F;img&#x2F;6.png">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
   
@@ -154,36 +162,164 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-java多线程学习（六）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      java多线程学习(六)——线程池、Executor
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/12/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89/" class="archive-article-date">
+
+        
+        <a href="/2019/12/12/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89/" class="archive-article-date">
   	<time datetime="2019-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/12/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89/">java多线程学习(六)——线程池、Executor</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、使用线程池的好处"><a href="#一、使用线程池的好处" class="headerlink" title="一、使用线程池的好处"></a>一、使用线程池的好处</h2><p><strong>线程池</strong>提供了一种限制和管理资源（包括执行一个任务）。 每个<strong>线程池</strong>还维护一些基本统计信息，例如已完成任务的数量。 这里借用《Java并发编程的艺术》提到的来说一下<strong>使用线程池的好处</strong>：</p>
+<p><strong>降低资源消耗</strong>。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
+<a id="more"></a>
+<p><strong>提高响应速度</strong>。当任务到达时，任务可以不需要的等到线程创建就能立即执行。</p>
+<p><strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</p>
+<h2 id="二、Executor-框架"><a href="#二、Executor-框架" class="headerlink" title="二、Executor 框架"></a>二、Executor 框架</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>Executor 框架是Java5之后引进的，在Java 5之后，通过 Executor 来启动线程比使用 Thread 的 start 方法更好，除了更易管理，效率更好（用线程池实现，节约开销）外，还有关键的一点：有助于避免 this 逃逸问题。</p>
+<blockquote>
+<p>补充：this逃逸是指在构造函数返回之前其他线程就持有该对象的引用. 调用尚未构造完全的对象的方法可能引发令人疑惑的错误。</p>
+</blockquote>
+<h3 id="2-2-Executor-框架结构-主要由三大部分组成"><a href="#2-2-Executor-框架结构-主要由三大部分组成" class="headerlink" title="2.2 Executor 框架结构(主要由三大部分组成)"></a>2.2 Executor 框架结构(主要由三大部分组成)</h3><h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>执行任务需要实现的<strong>Runnable接口</strong>或<strong>Callable接口</strong>。 <strong>Runnable接口</strong>或<strong>Callable接口</strong>实现类都可以被<strong>ThreadPoolExecutor</strong>或<strong>ScheduledThreadPoolExecutor</strong>执行。</p>
+<p><strong>两者的区别：</strong></p>
+<blockquote>
+<p><strong>Runnable接口</strong>不会返回结果但是<strong>Callable接口</strong>可以返回结果。后面介绍<strong>Executors类</strong>的一些方法的时候会介绍到两者的相互转换。</p>
+</blockquote>
+<h4 id="任务的执行"><a href="#任务的执行" class="headerlink" title="任务的执行"></a>任务的执行</h4><p>包括任务执行机制的<strong>核心接口Executor</strong> ，以及继承自Executor 接口的<strong>ExecutorService接口</strong>。<strong>ScheduledThreadPoolExecutor</strong>和<strong>ThreadPoolExecutor</strong>这两个关键类实现了<strong>ExecutorService接口</strong>。</p>
+<p><strong>注意：</strong> 通过查看ScheduledThreadPoolExecutor源代码我们发现ScheduledThreadPoolExecutor实际上是继承了ThreadPoolExecutor并实现了ScheduledExecutorService ，而ScheduledExecutorService又实现了ExecutorService，正如我们下面给出的类关系图显示的一样。</p>
+<p><strong>ThreadPoolExecutor类描述:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//AbstractExecutorService实现了ExecutorService接口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolExecutor</span> <span class="keyword">extends</span> <span class="title">AbstractExecutorService</span></span></span></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<p><strong>ScheduledThreadPoolExecutor类描述:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//ScheduledExecutorService实现了ExecutorService接口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledThreadPoolExecutor</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="class">        <span class="keyword">extends</span> <span class="title">ThreadPoolExecutor</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">ScheduledExecutorService</span></span></span></pre></td></tr></table></figure>
+
+<p><img src="/Users/zhoushiying/Desktop/%E7%AC%94%E8%AE%B0/img/6.png" alt=""></p>
+<h4 id="异步计算的结果"><a href="#异步计算的结果" class="headerlink" title="异步计算的结果"></a>异步计算的结果</h4><p><strong>Future接口</strong>以及Future接口的实现类<strong>FutureTask类</strong>。 当我们把<strong>Runnable接口</strong>或<strong>Callable接口</strong>的实现类提交（调用submit方法）给<strong>ThreadPoolExecutor</strong>或<strong>ScheduledThreadPoolExecutor</strong>时，会返回一个<strong>FutureTask对象</strong>。</p>
+<p>我们以<strong>AbstractExecutorService</strong>接口中的一个submit方法为例子来看看源代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Future&lt;?&gt; submit(Runnable task) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (task == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, <span class="keyword">null</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    execute(ftask);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> ftask;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>上面方法调用的newTaskFor方法返回了一个FutureTask对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> &lt;T&gt; <span class="function">RunnableFuture&lt;T&gt; <span class="title">newTaskFor</span><span class="params">(Runnable runnable, T value)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FutureTask&lt;T&gt;(runnable, value);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="2-3-Executor-框架的使用示意图"><a href="#2-3-Executor-框架的使用示意图" class="headerlink" title="2.3 Executor 框架的使用示意图"></a>2.3 Executor 框架的使用示意图</h3><img src="/Users/zhoushiying/Desktop/笔记/img/7.png" style="zoom:50%;" />
+
+<h2 id="三、ThreadPoolExecutor详解"><a href="#三、ThreadPoolExecutor详解" class="headerlink" title="三、ThreadPoolExecutor详解"></a>三、ThreadPoolExecutor详解</h2><p>线程池实现类ThreadPoolExecutor是Executor 框架最核心的类，先来看一下这个类中比较重要的四个属性</p>
+<h3 id="3-1如何创建ThreadPoolExecutor"><a href="#3-1如何创建ThreadPoolExecutor" class="headerlink" title="3.1如何创建ThreadPoolExecutor"></a>3.1如何创建ThreadPoolExecutor</h3><p>方式一：通过构造方法实现（官方API文档并不推荐，所以建议使用第二种方式）</p>
+<p>方式二：通过Executor 框架的工具类Executors来实现 我们可以创建三种类型的ThreadPoolExecutor：</p>
+<ul>
+<li><strong>FixedThreadPool</strong></li>
+<li><strong>SingleThreadExecutor</strong></li>
+<li><strong>CachedThreadPool</strong></li>
+</ul>
+<h3 id="3-2-FixedThreadPool详解"><a href="#3-2-FixedThreadPool详解" class="headerlink" title="3.2 FixedThreadPool详解"></a>3.2 FixedThreadPool详解</h3><p>FixedThreadPool被称为可重用固定线程数的线程池。通过Executors类中的相关源代码来看一下相关实现：</p>
+<p> <strong>FixedThreadPool的execute()方法运行示意图</strong></p>
+<img src="/Users/zhoushiying/Desktop/笔记/img/8.png" style="zoom:50%;" />
+
+<p><strong>上图说明：</strong></p>
+<ol>
+<li>如果当前运行的线程数小于corePoolSize，则创建新的线程来执行任务；</li>
+<li>当前运行的线程数等于corePoolSize后，将任务加入LinkedBlockingQueue；</li>
+<li>线程执行完1中的任务后，会在循环中反复从LinkedBlockingQueue中获取任务来执行；</li>
+</ol>
+<p><strong>FixedThreadPool使用无界队列 LinkedBlockingQueue（队列的容量为Intger.MAX_VALUE）作为线程池的工作队列会对线程池带来如下影响：</strong></p>
+<ol>
+<li>当线程池中的线程数达到corePoolSize后，新任务将在无界队列中等待，因此线程池中的线程数不会超过corePoolSize；</li>
+<li>由于1，使用无界队列时maximumPoolSize将是一个无效参数；</li>
+<li>由于1和2，使用无界队列时keepAliveTime将是一个无效参数；</li>
+<li>运行中的FixedThreadPool（未执行shutdown()或shutdownNow()方法）不会拒绝任务</li>
+</ol>
+<h3 id="3-3-SingleThreadExecutor详解"><a href="#3-3-SingleThreadExecutor详解" class="headerlink" title="3.3 SingleThreadExecutor详解"></a>3.3 SingleThreadExecutor详解</h3><p>SingleThreadExecutor是使用单个worker线程的Executor。</p>
+<p>新创建的SingleThreadExecutor的corePoolSize和maximumPoolSize都被设置为1.其他参数和FixedThreadPool相同。SingleThreadExecutor使用无界队列LinkedBlockingQueue作为线程池的工作队列（队列的容量为Intger.MAX_VALUE）。SingleThreadExecutor使用无界队列作为线程池的工作队列会对线程池带来的影响与FixedThreadPool相同。</p>
+<p><strong>SingleThreadExecutor的运行示意图</strong></p>
+<p><img src="/Users/zhoushiying/Desktop/%E7%AC%94%E8%AE%B0/img/9.png" alt=""></p>
+<p><strong>上图说明;</strong></p>
+<ol>
+<li>如果当前运行的线程数少于corePoolSize，则创建一个新的线程执行任务；</li>
+<li>当前线程池中有一个运行的线程后，将任务加入LinkedBlockingQueue</li>
+<li>线程执行完1中的任务后，会在循环中反复从LinkedBlockingQueue中获取任务来执行；</li>
+</ol>
+<h3 id="3-4-CachedThreadPool详解"><a href="#3-4-CachedThreadPool详解" class="headerlink" title="3.4 CachedThreadPool详解"></a>3.4 CachedThreadPool详解</h3><p>CachedThreadPool是一个会根据需要创建新线程的线程池。</p>
+<p>CachedThreadPool的corePoolSize被设置为空（0），maximumPoolSize被设置为Integer.MAX.VALUE，即它是无界的，这也就意味着如果主线程提交任务的速度高于maximumPool中线程处理任务的速度时，CachedThreadPool会不断创建新的线程。极端情况下，这样会导致耗尽cpu和内存资源。</p>
+<p><strong>CachedThreadPool的execute()方法的执行示意图</strong></p>
+<img src="/Users/zhoushiying/Desktop/笔记/img/10.png" style="zoom:50%;" />
+
+<p><strong>上图说明：</strong></p>
+<ol>
+<li>首先执行SynchronousQueue.offer(Runnable task)。如果当前maximumPool中有闲线程正在执行SynchronousQueue.poll(keepAliveTime,TimeUnit.NANOSECONDS)，那么主线程执行offer操作与空闲线程执行的poll操作配对成功，主线程把任务交给空闲线程执行，execute()方法执行完成，否则执行下面的步骤2；</li>
+<li>当初始maximumPool为空，或者maximumPool中没有空闲线程时，将没有线程执行SynchronousQueue.poll(keepAliveTime,TimeUnit.NANOSECONDS)。这种情况下，步骤1将失败，此时CachedThreadPool会创建新线程执行任务，execute方法执行完成；</li>
+</ol>
+<h2 id="四、ScheduledThreadPoolExecutor详解"><a href="#四、ScheduledThreadPoolExecutor详解" class="headerlink" title="四、ScheduledThreadPoolExecutor详解"></a>四、ScheduledThreadPoolExecutor详解</h2><h3 id="4-1-介绍"><a href="#4-1-介绍" class="headerlink" title="4.1 介绍"></a>4.1 介绍</h3><p><strong>ScheduledThreadPoolExecutor主要用来在给定的延迟后运行任务，或者定期执行任务。</strong></p>
+<p><strong>ScheduledThreadPoolExecutor使用的任务队列DelayQueue封装了一个PriorityQueue，PriorityQueue会对队列中的任务进行排序，执行所需时间短的放在前面先被执行(ScheduledFutureTask的time变量小的先执行)，如果执行所需时间相同则先提交的任务将被先执行(ScheduledFutureTask的squenceNumber变量小的先执行)。</strong></p>
+<h3 id="4-2-ScheduledThreadPoolExecutor运行机制"><a href="#4-2-ScheduledThreadPoolExecutor运行机制" class="headerlink" title="4.2 ScheduledThreadPoolExecutor运行机制"></a>4.2 ScheduledThreadPoolExecutor运行机制</h3><img src="/Users/zhoushiying/Library/Application Support/typora-user-images/image-20191212093720331.png" alt="image-20191212093720331" style="zoom:50%;" />
+
+<p><strong>ScheduledThreadPoolExecutor的执行主要分为两大部分：</strong></p>
+<ol>
+<li>当调用ScheduledThreadPoolExecutor的 <strong>scheduleAtFixedRate()</strong> 方法或者<strong>scheduleWirhFixedDelay()</strong> 方法时，会向ScheduledThreadPoolExecutor的 <strong>DelayQueue</strong> 添加一个实现了 <strong>RunnableScheduledFutur</strong> 接口的 <strong>ScheduledFutureTask</strong> 。</li>
+<li>线程池中的线程从DelayQueue中获取ScheduledFutureTask，然后执行任务。</li>
+</ol>
+<p><strong>ScheduledThreadPoolExecutor为了实现周期性的执行任务，对ThreadPoolExecutor做了如下修改：</strong></p>
+<ul>
+<li>使用 <strong>DelayQueue</strong> 作为任务队列；</li>
+<li>获取任务的方不同</li>
+<li>执行周期任务后，增加了额外的处理</li>
+</ul>
+<h2 id="五、各种线程池的适用场景介绍"><a href="#五、各种线程池的适用场景介绍" class="headerlink" title="五、各种线程池的适用场景介绍"></a>五、各种线程池的适用场景介绍</h2><p><strong>FixedThreadPool：</strong> 适用于为了满足资源管理需求，而需要限制当前线程数量的应用场景。它适用于负载比较重的服务器；</p>
+<p><strong>SingleThreadExecutor：</strong> 适用于需要保证顺序地执行各个任务并且在任意时间点，不会有多个线程是活动的应用场景。</p>
+<p><strong>CachedThreadPool：</strong> 适用于执行很多的短期异步任务的小程序，或者是负载较轻的服务器；</p>
+<p><strong>ScheduledThreadPoolExecutor：</strong> 适用于需要多个后台执行周期任务，同时为了满足资源管理需求而需要限制后台线程的数量的应用场景，</p>
+<p><strong>SingleThreadScheduledExecutor：</strong> 适用于需要单个后台线程执行周期任务，同时保证顺序地执行各个任务的应用场景。</p>
+<p>参考：</p>
+<p><a href="https://juejin.im/post/5b0f69e46fb9a009f41479b4#heading-14" target="_blank" rel="noopener">Java多线程学习（八）线程池与Executor 框架</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" target="_blank" rel="noopener" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechatpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -195,7 +331,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -208,654 +344,137 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" target="_blank" rel="noopener" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" target="_blank" rel="noopener" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" target="_blank" rel="noopener" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2019/12/12/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/12/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E9%9D%A2%E8%AF%95%E7%82%B9/" class="archive-article-date">
-  	<time datetime="2019-12-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-12</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/12/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E9%9D%A2%E8%AF%95%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基本类知识点——Object类、String类</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/12/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E9%9D%A2%E8%AF%95%E7%82%B9/">基本类知识点——Object类、String类</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/基本类//" class="article-tag-list-link color4">基本类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、使用线程池的好处"><span class="toc-number">1.</span> <span class="toc-text">一、使用线程池的好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Executor-框架"><span class="toc-number">2.</span> <span class="toc-text">二、Executor 框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-定义"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Executor-框架结构-主要由三大部分组成"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Executor 框架结构(主要由三大部分组成)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#任务"><span class="toc-number">2.2.1.</span> <span class="toc-text">任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#任务的执行"><span class="toc-number">2.2.2.</span> <span class="toc-text">任务的执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#异步计算的结果"><span class="toc-number">2.2.3.</span> <span class="toc-text">异步计算的结果</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-Executor-框架的使用示意图"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 Executor 框架的使用示意图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、ThreadPoolExecutor详解"><span class="toc-number">3.</span> <span class="toc-text">三、ThreadPoolExecutor详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1如何创建ThreadPoolExecutor"><span class="toc-number">3.1.</span> <span class="toc-text">3.1如何创建ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-FixedThreadPool详解"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 FixedThreadPool详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-SingleThreadExecutor详解"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 SingleThreadExecutor详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-CachedThreadPool详解"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 CachedThreadPool详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、ScheduledThreadPoolExecutor详解"><span class="toc-number">4.</span> <span class="toc-text">四、ScheduledThreadPoolExecutor详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-介绍"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-ScheduledThreadPoolExecutor运行机制"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 ScheduledThreadPoolExecutor运行机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、各种线程池的适用场景介绍"><span class="toc-number">5.</span> <span class="toc-text">五、各种线程池的适用场景介绍</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%94%EF%BC%89/">java多线程学习(五)——上下文切换、避免死锁、解决资源限制</a>
-    </h1>
-  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java多线程学习（六）" data-title="java多线程学习(六)——线程池、Executor" data-url="https://rochellezsy.github.io/2019/12/12/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%85%AD%EF%BC%89/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/11/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/">java多线程学习(四)——管道输入/输出流、join()、ThreadLocal、lock接口</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">java多线程学习(三)——volatile、等待/通知（wait/notify）机制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">java多线程学习(二)——Thread、synchronsized关键字</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/09/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/09/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">java多线程学习(一)——进程线程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/06/Java%20nio%E7%90%86%E8%A7%A3/">Java NIO的学习理解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/IO//" class="article-tag-list-link color3">IO</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/06/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/">Java集合框架学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/集合框架//" class="article-tag-list-link color5">集合框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-12-05T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/06/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/">死锁问题整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/死锁//" class="article-tag-list-link color3">死锁</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/05/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%EF%BC%8819.12.05%EF%BC%89/">每日学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">web学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Javaweb//" class="article-tag-list-link color3">Javaweb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/04/hello-world/" class="archive-article-date">
-  	<time datetime="2019-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/04/hello-world/">大莹的第一篇博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Hello</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/post//" class="article-tag-list-link color5">post</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2019-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/04/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式的四种实现方式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/code//" class="article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/04/%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2019-12-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/04/%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E6%95%B4%E7%90%86/">算法代码整理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/code//" class="article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -878,8 +497,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
