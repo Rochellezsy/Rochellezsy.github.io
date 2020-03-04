@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
   <title>Maven项目搭建遇到的错误分析 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Maven项目搭建遇到的错误分析背景： Maven使用的版本3.6.3 IDEA使用的版本2019.2.2 Java版本JRE 12  留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。 问题介绍： Maven在pom里添加的依赖一直导不进去，实际上已经在Maven我自己建的仓库">
+  <meta name="description" content="背景：Maven使用的版本3.6.3IDEA使用的版本2019.2.2Java版本JRE 12留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。">
 <meta name="keywords" content="Maven、pom、依赖">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Maven项目搭建遇到的错误分析">
 <meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2020&#x2F;03&#x2F;04&#x2F;Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="Maven项目搭建遇到的错误分析背景： Maven使用的版本3.6.3 IDEA使用的版本2019.2.2 Java版本JRE 12  留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。 问题介绍： Maven在pom里添加的依赖一直导不进去，实际上已经在Maven我自己建的仓库">
+<meta property="og:description" content="背景：Maven使用的版本3.6.3IDEA使用的版本2019.2.2Java版本JRE 12留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;4.png">
-<meta property="og:updated_time" content="2020-03-04T09:24:01.675Z">
+<meta property="og:updated_time" content="2020-03-04T09:36:17.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;1.png">
   
@@ -180,33 +180,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Maven项目搭建遇到的错误分析"><a href="#Maven项目搭建遇到的错误分析" class="headerlink" title="Maven项目搭建遇到的错误分析"></a>Maven项目搭建遇到的错误分析</h2><p>背景：</p>
-<p>Maven使用的版本3.6.3</p>
-<p>IDEA使用的版本2019.2.2</p>
-<p>Java版本JRE 12</p>
-<p><img src="/assets/20200304/1.png" alt="配置1"></p>
-<p>留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。</p>
-<p>问题介绍：</p>
-<p>Maven在pom里添加的依赖一直导不进去，实际上已经在Maven我自己建的仓库已经存在，但就是没办法到IDEA里面，查询了很久，发现Build-&gt;Maven-&gt;Repositories出现no remote Repositories，并且使用generate也搜不到jar包。</p>
-<p>期间各种调试的过程也出现了一个个子问题：</p>
-<p>1、Unable to import Maven project，查看IDEA log日志查看问题内容</p>
-<p>2、不支持发行版本5</p>
-<p><img src="/assets/20200304/2.png" alt="配置2"></p>
-<p>解决：原因是项目运行的时候，jdk版本与本地的版本不一致。到IDEA—&gt;File—&gt;project structure，检查了一下project和moduels中jdk版本与本地对比，发现不一致，于是修改为jdk12(你修改为与你本地的版本一致即可)</p>
-<p>3、错误The goal you specified requires a project to execute but there is no POM</p>
-<p>原因：实际上就是pom依赖添加的标红，没有将jar包成功导入进去</p>
-<p>最终解决问题：</p>
-<p>试了无数次，mvn clean,mvn install各种，最终参考了<a href="https://blog.csdn.net/itanping/article/details/101024299" target="_blank" rel="noopener">https://blog.csdn.net/itanping/article/details/101024299</a> 这个博客的解决，是Maven 新老版本兼容有问题，应下载并使用 Maven 3.6.1 与 Intellij IDEA 2019.2.2搭配。</p>
-<p>所以我重新配置了：</p>
-<p><img src="/assets/20200304/3.png" alt="配置3"></p>
-<p>然后一步一步解决出现的问题，最终导入依赖成功：</p>
-<p><img src="/assets/20200304/4.png" alt="配置4"></p>
-<p>总结：</p>
-<p>1、解决问题的过程枯燥无味，着急</p>
-<p>2、着急的时候需要喝一杯紫葡萄酪酪，真好喝呀</p>
-<p>3、网上很多方法会尝试失败，但是不要放弃，心态要摆正</p>
-<p>4、可以在stack overflow查询问题，可以看到很多人问题和我遇到的是相似的，即便回答的解决办法我尝试不行，但是别人也会遇到和自己一样的问题，会让自己安心，慢慢解决下去。</p>
-<p>5、接下来抓紧时间开始做项目练习，我觉得我可以的，一定拿下秋招。</p>
+        <p>背景：<br>Maven使用的版本3.6.3<br>IDEA使用的版本2019.2.2<br>Java版本JRE 12<br><img src="/assets/20200304/1.png" style="zoom:50%"><br>留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。</p>
+<a id="more"></a>
+<p>问题介绍：<br>Maven在pom里添加的依赖一直导不进去，实际上已经在Maven我自己建的仓库已经存在，但就是没办法到IDEA里面，查询了很久，发现Build-&gt;Maven-&gt;Repositories出现no remote Repositories，并且使用generate也搜不到jar包。</p>
+<p>期间各种调试的过程也出现了一个个子问题：<br>1、Unable to import Maven project，查看IDEA log日志查看问题内容<br>2、不支持发行版本5<br><img src="/assets/20200304/2.png" style="zoom:50%"><br>解决：原因是项目运行的时候，jdk版本与本地的版本不一致。到IDEA—&gt;File—&gt;project structure，检查了一下project和moduels中jdk版本与本地对比，发现不一致，于是修改为jdk12(你修改为与你本地的版本一致即可)<br>3、错误The goal you specified requires a project to execute but there is no POM<br>原因：实际上就是pom依赖添加的标红，没有将jar包成功导入进去</p>
+<p>最终解决问题：<br>试了无数次，mvn clean,mvn install各种，最终参考了<a href="https://blog.csdn.net/itanping/article/details/101024299" target="_blank" rel="noopener">https://blog.csdn.net/itanping/article/details/101024299</a> 这个博客的解决方法，是Maven新老版本兼容有问题，应下载并使用Maven 3.6.1与 Intellij IDEA 2019.2.2搭配。<br>所以我重新配置了：<br><img src="/assets/20200304/3.png" style="zoom:50%"><br>然后一步一步解决出现的问题，最终导入依赖成功：<br><img src="/assets/20200304/4.png" style="zoom:70%"><br>总结：<br>1、解决问题的过程枯燥无味，着急<br>2、着急的时候需要喝一杯紫葡萄酪酪，真好喝呀<br>3、网上很多方法会尝试失败，但是不要放弃，心态要摆正<br>4、可以在stack overflow查询问题，可以看到很多人问题和我遇到的是相似的，即便回答的解决办法我尝试不行，但是别人也会遇到和自己一样的问题，会让自己安心，说明问题是可以解决的。<br>5、接下来抓紧时间开始做项目练习，我觉得我可以的，一定拿下秋招。</p>
 
       
 
@@ -361,7 +339,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven项目搭建遇到的错误分析"><span class="toc-number">1.</span> <span class="toc-text">Maven项目搭建遇到的错误分析</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
