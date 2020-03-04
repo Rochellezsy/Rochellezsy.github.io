@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>Maven项目搭建遇到的错误分析 | Rochelle的博客</title>
+  <title>每日debug记录：Maven项目遇到的问题 | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景：Maven使用的版本3.6.3IDEA使用的版本2019.2.2Java版本JRE 12留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。">
-<meta name="keywords" content="Maven、pom、依赖">
+  <meta name="description" content="1、关于SpringApplication包无法导入报错问题修改版本为SprinBoot版本为1.5.8解决问题">
+<meta name="keywords" content="Maven、debug">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Maven项目搭建遇到的错误分析">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2020&#x2F;03&#x2F;04&#x2F;Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:title" content="每日debug记录：Maven项目遇到的问题">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2020&#x2F;03&#x2F;05&#x2F;Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="背景：Maven使用的版本3.6.3IDEA使用的版本2019.2.2Java版本JRE 12留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。">
+<meta property="og:description" content="1、关于SpringApplication包无法导入报错问题修改版本为SprinBoot版本为1.5.8解决问题">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;1.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;2.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;3.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;4.png">
-<meta property="og:updated_time" content="2020-03-04T09:36:17.288Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;1.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;4.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;3.png">
+<meta property="og:updated_time" content="2020-03-04T15:32:57.349Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;1.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;1.png">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
   
@@ -160,32 +160,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Maven项目搭建遇到的错误分析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Maven项目遇到的问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Maven项目搭建遇到的错误分析
+      每日debug记录：Maven项目遇到的问题
     </h1>
   
 
         
-        <a href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2020-03-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
+        <a href="/2020/03/05/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-03-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>背景：<br>Maven使用的版本3.6.3<br>IDEA使用的版本2019.2.2<br>Java版本JRE 12<br><img src="/assets/20200304/1.png" style="zoom:50%"><br>留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。</p>
+        <h3 id="1、关于SpringApplication包无法导入报错问题"><a href="#1、关于SpringApplication包无法导入报错问题" class="headerlink" title="1、关于SpringApplication包无法导入报错问题"></a>1、关于SpringApplication包无法导入报错问题</h3><p>修改版本为SprinBoot版本为1.5.8解决问题</p>
+<img src="/assets/20200304_1/1.png" style="zoom:40%">
 <a id="more"></a>
-<p>问题介绍：<br>Maven在pom里添加的依赖一直导不进去，实际上已经在Maven我自己建的仓库已经存在，但就是没办法到IDEA里面，查询了很久，发现Build-&gt;Maven-&gt;Repositories出现no remote Repositories，并且使用generate也搜不到jar包。</p>
-<p>期间各种调试的过程也出现了一个个子问题：<br>1、Unable to import Maven project，查看IDEA log日志查看问题内容<br>2、不支持发行版本5<br><img src="/assets/20200304/2.png" style="zoom:50%"><br>解决：原因是项目运行的时候，jdk版本与本地的版本不一致。到IDEA—&gt;File—&gt;project structure，检查了一下project和moduels中jdk版本与本地对比，发现不一致，于是修改为jdk12(你修改为与你本地的版本一致即可)<br>3、错误The goal you specified requires a project to execute but there is no POM<br>原因：实际上就是pom依赖添加的标红，没有将jar包成功导入进去</p>
-<p>最终解决问题：<br>试了无数次，mvn clean,mvn install各种，最终参考了<a href="https://blog.csdn.net/itanping/article/details/101024299" target="_blank" rel="noopener">https://blog.csdn.net/itanping/article/details/101024299</a> 这个博客的解决方法，是Maven新老版本兼容有问题，应下载并使用Maven 3.6.1与 Intellij IDEA 2019.2.2搭配。<br>所以我重新配置了：<br><img src="/assets/20200304/3.png" style="zoom:50%"><br>然后一步一步解决出现的问题，最终导入依赖成功：<br><img src="/assets/20200304/4.png" style="zoom:70%"><br>总结：<br>1、解决问题的过程枯燥无味，着急<br>2、着急的时候需要喝一杯紫葡萄酪酪，真好喝呀<br>3、网上很多方法会尝试失败，但是不要放弃，心态要摆正<br>4、可以在stack overflow查询问题，可以看到很多人问题和我遇到的是相似的，即便回答的解决办法我尝试不行，但是别人也会遇到和自己一样的问题，会让自己安心，说明问题是可以解决的。<br>5、接下来抓紧时间开始做项目练习，我觉得我可以的，一定拿下秋招。</p>
 
+<h3 id="2、mybatis-generator-core引入依赖报错"><a href="#2、mybatis-generator-core引入依赖报错" class="headerlink" title="2、mybatis-generator-core引入依赖报错"></a>2、mybatis-generator-core引入依赖报错</h3><p>问题界面：</p>
+<img src="/assets/20200304_1/2.png" style="zoom:40%">
+
+<p>解决办法：<br>查询了Alirepo<a href="https://maven.aliyun.com/mvn/search" target="_blank" rel="noopener">https://maven.aliyun.com/mvn/search</a><br>发现这个groupId不是org.mybatis.generator，所以导致core下载不下来<br>更改groupId即可，更改为io.github.orange1438</p>
+<img src="/assets/20200304_1/4.png" style="zoom:40%">
+
+<p>成功界面：</p>
+<img src="/assets/20200304_1/3.png" style="zoom:40%">
       
 
       
@@ -229,7 +235,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">springboot、Maven</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">springboot、Maven、pom</a>
         		</li>
       		
 		</ul>
@@ -296,7 +302,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2020/03/05/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,18 +316,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/03/05/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          每日debug记录：Maven项目遇到的问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/29/Redis%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Redis入门知识（一）</div>
+    <a href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Maven项目搭建遇到的错误分析</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -348,7 +345,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、关于SpringApplication包无法导入报错问题"><span class="toc-number">1.</span> <span class="toc-text">1、关于SpringApplication包无法导入报错问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、mybatis-generator-core引入依赖报错"><span class="toc-number">2.</span> <span class="toc-text">2、mybatis-generator-core引入依赖报错</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -362,7 +359,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Maven项目搭建遇到的错误分析" data-title="Maven项目搭建遇到的错误分析" data-url="https://rochellezsy.github.io/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/"></div>
+	<div class="ds-thread" data-thread-key="Maven项目遇到的问题" data-title="每日debug记录：Maven项目遇到的问题" data-url="https://rochellezsy.github.io/2020/03/05/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
