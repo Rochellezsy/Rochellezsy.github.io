@@ -156,6 +156,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Maven项目搭建遇到的错误分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/">Maven项目搭建遇到的错误分析</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2020-03-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Maven项目搭建遇到的错误分析"><a href="#Maven项目搭建遇到的错误分析" class="headerlink" title="Maven项目搭建遇到的错误分析"></a>Maven项目搭建遇到的错误分析</h2><p>背景：</p>
+<p>Maven使用的版本3.6.3</p>
+<p>IDEA使用的版本2019.2.2</p>
+<p>Java版本JRE 12</p>
+<p><img src="/img/20200304/1.png" alt="配置1"></p>
+<p>留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。</p>
+<p>问题介绍：</p>
+<p>Maven在pom里添加的依赖一直导不进去，实际上已经在Maven我自己建的仓库已经存在，但就是没办法到IDEA里面，查询了很久，发现Build-&gt;Maven-&gt;Repositories出现no remote Repositories，并且使用generate也搜不到jar包。</p>
+<p>期间各种调试的过程也出现了一个个子问题：</p>
+<p>1、Unable to import Maven project，查看IDEA log日志查看问题内容</p>
+<p>2、不支持发行版本5</p>
+<p><img src="https://github.com/Rochellezsy/image/blob/master/20200304/2.png" alt="配置2"></p>
+<p>解决：原因是项目运行的时候，jdk版本与本地的版本不一致。到IDEA—&gt;File—&gt;project structure，检查了一下project和moduels中jdk版本与本地对比，发现不一致，于是修改为jdk12(你修改为与你本地的版本一致即可)</p>
+<p>3、错误The goal you specified requires a project to execute but there is no POM</p>
+<p>原因：实际上就是pom依赖添加的标红，没有将jar包成功导入进去</p>
+<p>最终解决问题：</p>
+<p>试了无数次，mvn clean,mvn install各种，最终参考了<a href="https://blog.csdn.net/itanping/article/details/101024299" target="_blank" rel="noopener">https://blog.csdn.net/itanping/article/details/101024299</a> 这个博客的解决，是Maven 新老版本兼容有问题，应下载并使用 Maven 3.6.1 与 Intellij IDEA 2019.2.2搭配。</p>
+<p>所以我重新配置了：</p>
+<p><img src="https://github.com/Rochellezsy/image/blob/master/20200304/3.png" alt="配置3"></p>
+<p>然后一步一步解决出现的问题，最终导入依赖成功：</p>
+<p><img src="https://github.com/Rochellezsy/image/blob/master/20200304/4.png" alt="配置4"></p>
+<p>总结：</p>
+<p>1、解决问题的过程枯燥无味，着急</p>
+<p>2、着急的时候需要喝一杯紫葡萄酪酪，真好喝呀</p>
+<p>3、网上很多方法会尝试失败，但是不要放弃，心态要摆正</p>
+<p>4、可以在stack overflow查询问题，可以看到很多人问题和我遇到的是相似的，即便回答的解决办法我尝试不行，但是别人也会遇到和自己一样的问题，会让自己安心，慢慢解决下去。</p>
+<p>5、接下来抓紧时间开始做项目练习，我觉得我可以的，一定拿下秋招。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">springboot、Maven</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Maven//" class="article-tag-list-link color1">Maven</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Redis入门知识一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -668,91 +779,6 @@
 
 
   
-    <article id="post-java多线程学习（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">java多线程学习(二)——Thread、synchronsized关键字</a>
-    </h1>
-  
-
-        
-        <a href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2019-12-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、Thread类的方法使用"><a href="#一、Thread类的方法使用" class="headerlink" title="一、Thread类的方法使用"></a>一、Thread类的方法使用</h2><h3 id="1-1-currentThread-方法"><a href="#1-1-currentThread-方法" class="headerlink" title="1.1 currentThread()方法"></a>1.1 currentThread()方法</h3><p>currentThread()方法可以返回代码被那个线程调用的信息。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">java学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/多线程//" class="article-tag-list-link color4">多线程</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/10/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-java多线程学习（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -841,7 +867,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -932,11 +958,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">数据库学习</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">java学习</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">java学习</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">springboot、Maven</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">数据库学习</a>
               </li>
              
               <li class="article-tag-list-item">
