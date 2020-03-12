@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Rochelle的博客">
 <meta property="og:description" content="RESTful API就是REST风格的API。使用场景：前端接收到的用户请求统一由一个后台来处理并返回给不同的前端肯定是最科学和最经济的方式，RESTful API就是一套协议来规范多种形式的前端和同一个后台的交互方式。 理解：RESTful API由后台也就是SERVER来提供前端来调用。前端调用API向后台发起HTTP请求，后台响应请求将处理结果反馈给前端。也就是说RESTful 是典型的基">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-06T16:13:14.840Z">
+<meta property="og:updated_time" content="2020-03-12T07:55:47.834Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
@@ -193,6 +193,13 @@
 <li><p>POST:<a href="http://www.xxx.com/source/id" target="_blank" rel="noopener">http://www.xxx.com/source/id</a> 表示新建指定ID的某一类资源。<br>例如POST:<a href="http://www.xxx.com/friends/123" target="_blank" rel="noopener">http://www.xxx.com/friends/123</a> 表示为指定ID为123的会员新增好友。</p>
 </li>
 </ul>
+<p><strong>REST和RPC的区别</strong><br>Rest：严格的说接口很规范，操作对象即为资源，对资源的四种操作（post、get、put、delete），并且参数都放在URL上。不严格的说Http+json、Http+xml，常见的http api都可以称为Rest接口。<br>RPC：常说的远程方法调用，就是像调用本地方法一样调用远程方法，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC通常基于TCP实现，常用框架例如dubbo，netty、mina、thrift。</p>
+<p>PC风格，可能会这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">/queryOrder?orderId=<span class="number">123</span></span></pre></td></tr></table></figure>
+<p>用Restful风格：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Get  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">/order?orderId=<span class="number">123</span></span></pre></td></tr></table></figure>
+<p>RPC是面向过程，Restful是面向资源，并且使用了Http动词。从这个维度上看，Restful风格的url在表述的精简性、可读性上都要更好。</p>
+<p><strong>RPC的好处</strong><br>RPC 的主要功能目标是让构建分布式计算（应用）更容易，在提供强大的远程调用能力时不损失本地调用的语义简洁性。 为实现该目标，RPC 框架需提供一种透明调用机制让使用者不必显式的区分本地调用和远程调用。<br>如果没有统一的服务框架—RPC框架，各个团队的服务提供方就需要各自实现一套序列化、反序列化、网络框架、连接池、收发线程、超时处理、状态机等“业务之外”的重复技术劳动，造成整体的低效。所以，统一RPC框架把上述“业务之外”的技术劳动统一处理，是服务化首要解决的问题</p>
 <p>参考：<br><a href="https://blog.csdn.net/hjc1984117/article/details/77334616" target="_blank" rel="noopener">什么是RESTful API？</a></p>
 
       
@@ -476,14 +483,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">springboot、Maven、pom</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">API</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color2">java学习</a>
               </li>
              
@@ -492,11 +491,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Hello</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">springboot、Maven、pom</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">API</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">数据库学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Hello</a>
               </li>
              
               <li class="article-tag-list-item">
