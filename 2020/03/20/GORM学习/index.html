@@ -6,23 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>每日debug记录：Maven项目遇到的问题 | Rochelle的博客</title>
+  <title>GORM学习（20.03.20） | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、关于SpringApplication包无法导入报错问题修改版本为SprinBoot版本为1.5.8解决问题">
-<meta name="keywords" content="Maven、debug">
+  <meta name="description" content="1、什么是ORM？从程序员角度理解： 在go代码里用一个结构体struct和一个关系型数据库里面的一个数据表，他们之间可以存在一个映射关系，这就是ORM要做的事情。把程序中的对象或者实例，或者说go语言一个结构体实例，把他映射成数据库mysql里面存储的一条数据，对应起来。">
+<meta name="keywords" content="orm、gorm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每日debug记录：Maven项目遇到的问题">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2020&#x2F;03&#x2F;04&#x2F;Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98&#x2F;index.html">
+<meta property="og:title" content="GORM学习（20.03.20）">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2020&#x2F;03&#x2F;20&#x2F;GORM%E5%AD%A6%E4%B9%A0&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="1、关于SpringApplication包无法导入报错问题修改版本为SprinBoot版本为1.5.8解决问题">
+<meta property="og:description" content="1、什么是ORM？从程序员角度理解： 在go代码里用一个结构体struct和一个关系型数据库里面的一个数据表，他们之间可以存在一个映射关系，这就是ORM要做的事情。把程序中的对象或者实例，或者说go语言一个结构体实例，把他映射成数据库mysql里面存储的一条数据，对应起来。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;1.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;2.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;4.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;3.png">
-<meta property="og:updated_time" content="2020-03-05T05:29:18.608Z">
+<meta property="og:updated_time" content="2020-03-20T05:46:35.424Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304_1&#x2F;1.png">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
   
@@ -160,38 +155,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Maven项目遇到的问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-GORM学习" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      每日debug记录：Maven项目遇到的问题
+      GORM学习（20.03.20）
     </h1>
   
 
         
-        <a href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-03-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
+        <a href="/2020/03/20/GORM%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2020-03-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1、关于SpringApplication包无法导入报错问题"><a href="#1、关于SpringApplication包无法导入报错问题" class="headerlink" title="1、关于SpringApplication包无法导入报错问题"></a>1、关于SpringApplication包无法导入报错问题</h3><p>修改版本为SprinBoot版本为1.5.8解决问题</p>
-<img src="/assets/20200304_1/1.png" style="zoom:40%">
+        <h3 id="1、什么是ORM？"><a href="#1、什么是ORM？" class="headerlink" title="1、什么是ORM？"></a>1、什么是ORM？</h3><p><strong>从程序员角度理解：</strong></p>
+<p>在go代码里用一个结构体struct和一个关系型数据库里面的一个数据表，他们之间可以存在一个映射关系，这就是ORM要做的事情。<br>把程序中的对象或者实例，或者说go语言一个结构体实例，把他映射成数据库mysql里面存储的一条数据，对应起来。</p>
 <a id="more"></a>
+<p>形象化：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> UserInfo <span class="keyword">struct</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  ID <span class="keyword">uint</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  NAME <span class="keyword">string</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  Gender <span class="keyword">string</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  Hobby <span class="keyword">string</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  u1 := UserInfo&#123;<span class="number">1</span>, <span class="string">"大莹"</span>, <span class="string">"女"</span>, <span class="string">"打游戏"</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">//将u1数据存入数据库</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">//SQL语句：insert into userinfo values(1, "大莹", "女", "打游戏");</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  <span class="comment">//ORM语句</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  orm.Create(&amp;u1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 
-<h3 id="2、mybatis-generator-core引入依赖报错"><a href="#2、mybatis-generator-core引入依赖报错" class="headerlink" title="2、mybatis-generator-core引入依赖报错"></a>2、mybatis-generator-core引入依赖报错</h3><p>问题界面：</p>
-<img src="/assets/20200304_1/2.png" style="zoom:40%">
+<p><strong>ORM可以理解为三个映射关系：</strong></p>
+<p>数据表&lt;-&gt;结构体<br>数据行&lt;-&gt;结构体实例<br>字段&lt;-&gt;结构体字段</p>
+<p><strong>ORM优缺点：</strong></p>
+<p>优点：提高开发效率<br>缺点：牺牲执行性能、牺牲灵活性、弱化SQL能力</p>
+<h3 id="2、gorm介绍"><a href="#2、gorm介绍" class="headerlink" title="2、gorm介绍"></a>2、gorm介绍</h3><p>附GORM指南：<a href="https://gorm.io/" target="_blank" rel="noopener">https://gorm.io/</a><br>可根据指南详细学习</p>
 
-<p>解决办法：<br>查询了Alirepo<a href="https://maven.aliyun.com/mvn/search" target="_blank" rel="noopener">https://maven.aliyun.com/mvn/search</a><br>发现这个groupId不是org.mybatis.generator，所以导致core下载不下来<br>更改groupId即可，更改为io.github.orange1438</p>
-<img src="/assets/20200304_1/4.png" style="zoom:40%">
-
-<p>成功界面：</p>
-<img src="/assets/20200304_1/3.png" style="zoom:40%">
       
 
       
@@ -235,7 +230,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">springboot、Maven、pom</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">go、orm</a>
         		</li>
       		
 		</ul>
@@ -247,7 +242,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Maven//" class="article-tag-list-link color1">Maven</a>
+        			<a href="/categories/Intern//" class="article-tag-list-link color2">Intern</a>
         		</li>
       		
 		</ul>
@@ -302,7 +297,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2020/03/20/GORM%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -316,18 +311,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Maven项目搭建遇到的错误分析
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/29/Redis%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Redis入门知识（一）</div>
+    <a href="/2020/03/18/%E5%AE%9E%E4%B9%A0%E6%97%B6%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%EF%BC%8820.03.18%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">实习时遇到的问题总结（20.03.18）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -354,7 +340,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、关于SpringApplication包无法导入报错问题"><span class="toc-number">1.</span> <span class="toc-text">1、关于SpringApplication包无法导入报错问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、mybatis-generator-core引入依赖报错"><span class="toc-number">2.</span> <span class="toc-text">2、mybatis-generator-core引入依赖报错</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、什么是ORM？"><span class="toc-number">1.</span> <span class="toc-text">1、什么是ORM？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、gorm介绍"><span class="toc-number">2.</span> <span class="toc-text">2、gorm介绍</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -368,7 +354,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Maven项目遇到的问题" data-title="每日debug记录：Maven项目遇到的问题" data-url="https://rochellezsy.github.io/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"></div>
+	<div class="ds-thread" data-thread-key="GORM学习" data-title="GORM学习（20.03.20）" data-url="https://rochellezsy.github.io/2020/03/20/GORM%E5%AD%A6%E4%B9%A0/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
