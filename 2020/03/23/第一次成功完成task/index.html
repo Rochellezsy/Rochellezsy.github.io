@@ -6,23 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://rochellezsy.github.io">
-  <title>Maven项目搭建遇到的错误分析 | Rochelle的博客</title>
+  <title>第一次成功完成项目task | Rochelle的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景：Maven使用的版本3.6.3IDEA使用的版本2019.2.2Java版本JRE 12留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。">
-<meta name="keywords" content="Maven、pom、依赖">
+  <meta name="description" content="嘻嘻，终于在家的实习两周完成了mentor交付的task任务，并成功提交merge request。 我发现我真的运气很好，这几天都运气超级棒，有点害怕把运气都用光了。我遇到了个超好的mentor，会和我说be free to proceed，don’t put too much pressure on yourself。 其实mentor给我布置task任务很简单，但是你要完成，就必须要了解项目">
+<meta name="keywords" content="bug、goroutine">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Maven项目搭建遇到的错误分析">
-<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2020&#x2F;03&#x2F;04&#x2F;Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90&#x2F;index.html">
+<meta property="og:title" content="第一次成功完成项目task">
+<meta property="og:url" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;2020&#x2F;03&#x2F;23&#x2F;%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%88%90%E5%8A%9F%E5%AE%8C%E6%88%90task&#x2F;index.html">
 <meta property="og:site_name" content="Rochelle的博客">
-<meta property="og:description" content="背景：Maven使用的版本3.6.3IDEA使用的版本2019.2.2Java版本JRE 12留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。">
+<meta property="og:description" content="嘻嘻，终于在家的实习两周完成了mentor交付的task任务，并成功提交merge request。 我发现我真的运气很好，这几天都运气超级棒，有点害怕把运气都用光了。我遇到了个超好的mentor，会和我说be free to proceed，don’t put too much pressure on yourself。 其实mentor给我布置task任务很简单，但是你要完成，就必须要了解项目">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;1.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;2.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;3.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;4.png">
-<meta property="og:updated_time" content="2020-03-04T09:36:17.288Z">
+<meta property="og:updated_time" content="2020-03-23T06:05:52.012Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;rochellezsy.github.io&#x2F;assets&#x2F;20200304&#x2F;1.png">
   
     <link rel="alternative" href="/atom.xml" title="Rochelle的博客" type="application/atom+xml">
   
@@ -160,31 +155,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Maven项目搭建遇到的错误分析" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-第一次成功完成task" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Maven项目搭建遇到的错误分析
+      第一次成功完成项目task
     </h1>
   
 
         
-        <a href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2020-03-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
+        <a href="/2020/03/23/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%88%90%E5%8A%9F%E5%AE%8C%E6%88%90task/" class="archive-article-date">
+  	<time datetime="2020-03-22T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>背景：<br>Maven使用的版本3.6.3<br>IDEA使用的版本2019.2.2<br>Java版本JRE 12<br><img src="/assets/20200304/1.png" style="zoom:50%"><br>留下了老母亲的泪水，一个Maven项目的依赖一直导入不成功，试了两天，昨天直接整到了夜里1点，终于在今天点了一杯奶茶，下午4点搞定，看到导入的依赖jar包，真的暴风哭泣。</p>
+        <p>嘻嘻，终于在家的实习两周完成了mentor交付的task任务，并成功提交merge request。</p>
+<p>我发现我真的运气很好，这几天都运气超级棒，有点害怕把运气都用光了。我遇到了个超好的mentor，会和我说be free to proceed，don’t put too much pressure on yourself。</p>
+<p>其实mentor给我布置task任务很简单，但是你要完成，就必须要了解项目的整个流程，写完代码测试成功再考虑提交，一整套流程要下来才能算你暂时完成了task，提交上去当然也要看有没有bug，所以时间花了两周也比较久。而且可以能够感受到mentor会有意的在培养，会告诉你他一般的话怎么怎么做，这样子的情况他会怎么怎么考虑，但是不会具体到每一个步骤指导怎么做，给你充分的锻炼时间，所以在探索中学习成长，真的很感谢我优秀的mentor，这段时间学习到了好多东西，也懂得好多。</p>
 <a id="more"></a>
-<p>问题介绍：<br>Maven在pom里添加的依赖一直导不进去，实际上已经在Maven我自己建的仓库已经存在，但就是没办法到IDEA里面，查询了很久，发现Build-&gt;Maven-&gt;Repositories出现no remote Repositories，并且使用generate也搜不到jar包。</p>
-<p>期间各种调试的过程也出现了一个个子问题：<br>1、Unable to import Maven project，查看IDEA log日志查看问题内容<br>2、不支持发行版本5<br><img src="/assets/20200304/2.png" style="zoom:50%"><br>解决：原因是项目运行的时候，jdk版本与本地的版本不一致。到IDEA—&gt;File—&gt;project structure，检查了一下project和moduels中jdk版本与本地对比，发现不一致，于是修改为jdk12(你修改为与你本地的版本一致即可)<br>3、错误The goal you specified requires a project to execute but there is no POM<br>原因：实际上就是pom依赖添加的标红，没有将jar包成功导入进去</p>
-<p>最终解决问题：<br>试了无数次，mvn clean,mvn install各种，最终参考了<a href="https://blog.csdn.net/itanping/article/details/101024299" target="_blank" rel="noopener">https://blog.csdn.net/itanping/article/details/101024299</a> 这个博客的解决方法，是Maven新老版本兼容有问题，应下载并使用Maven 3.6.1与 Intellij IDEA 2019.2.2搭配。<br>所以我重新配置了：<br><img src="/assets/20200304/3.png" style="zoom:50%"><br>然后一步一步解决出现的问题，最终导入依赖成功：<br><img src="/assets/20200304/4.png" style="zoom:70%"><br>总结：<br>1、解决问题的过程枯燥无味，着急<br>2、着急的时候需要喝一杯紫葡萄酪酪，真好喝呀<br>3、网上很多方法会尝试失败，但是不要放弃，心态要摆正<br>4、可以在stack overflow查询问题，可以看到很多人问题和我遇到的是相似的，即便回答的解决办法我尝试不行，但是别人也会遇到和自己一样的问题，会让自己安心，说明问题是可以解决的。<br>5、接下来抓紧时间开始做项目练习，我觉得我可以的，一定拿下秋招。</p>
+<p>整个实习的感受就是，大家都好优秀，当你什么都不懂的时候，刚加入团队,看到团队里的成员在每天commit代码，其实内心是很慌的，但是mentor会很耐心说你慢慢来，按照你的进度，真的很感谢。</p>
+<p><strong>说一下我这两周的实习学习心得，给很多还没有实习的同学建议：</strong></p>
+<p>1、首先公司里的程序员都要有自己DBC machine，工作的话大部分程序员都会选择在服务器上使用vim。</p>
+<p>2、公司的代码是不允许拷贝到本地的，也就是说你要在公司的服务器上操作代码，对于我而言我学习了一会儿vim还是很不习惯，就采用了vscode的ssh remote host来连接远程的服务器，能够实现在编译器上修改代码，很方便，推荐给新手程序员。</p>
+<p>3、对于我而言，刚加入公司部门参与项目开发，开发环境的配置是非常重要的，经常会遇项目需要环境安装的各种问题，尤其在家自己一个人实习。我个人的经验就是，一定要增加自己的主观能动性，要坚持自己解决问题，实在不行，没办法继续开展实验进度的情况下询问mentor，会有很好的锻炼。在整个项目开发的过程中你会遇到很多一样的问题，比如已经有server占用端口在跑了等，后续会遇到很多类似的，自己遇到第一次的时候往往会解决了很久，但是后面就会很快的处理好，这些都是经验，所以开始的时间慢一点都是值得的。</p>
+<p>4、坚持把每一个小问题搞明白弄懂，例如log日志，vim操作，git操作，分支，权限等等，因为作为程序员这些小问题都伴随一生，要坚持，不可以退缩。</p>
+<p>5、要相信自己，我就有很多次遇到过困难，没办法连接我的DBCmachine的log地址导致进行log测试出现错误（需要切换到自己的Ldapuser），没有办法找到占用的进程kill掉它，lsof -i不显示（因为在其他ldapuser下进行的，所以sudo查看）等等，要相信自己，主动去询问mentor，一定可以解决的。</p>
+<p>6、这两个星期有学到很多知识，尝试了go语言的后端开发，完成了与项目其他队员的git协同开发的尝试，我要学会感谢，我以后一定会继续加油努力。</p>
+<p><strong>其中开发的时候遇到的bug分析：</strong></p>
+<p>1、因为我的开发需要基于别人的task之上，所以当我做实验时就会发现一些问题没有办法解决，脑壳晕，部署一个testbed时间也很久，做一次实验要等很久，一度怀疑自己，和mentor说了问题，没想到误打误撞相当于做了测试，帮助fix了一些存在bug，总而言之，开发这些问题是会经常遇到的，一定要亲历亲为，从头到尾去实践，不然是不明白问题出在的地方的。</p>
+<p>2、关于go语言的goroutine的使用。<br>goroutine的概念类似于线程，但 goroutine是由Go的运行时（runtime）调度和管理的。Go程序会智能地将 goroutine 中的任务合理地分配给每个CPU。Go语言之所以被称为现代化的编程语言，就是因为它在语言层面已经内置了调度和上下文切换的机制。<br>我在开发的时候没有使用过goroutine，直接用了多个去分别执行函数，我的mentor给我指出了错误，启动多个goroutine，他们是并发执行的，而goroutine的调度是随机的。所以会失败，虽然我的实验测试下来没有问题，但是这个很不好说，应该用一个go去顺序执行完成多个task。当你需要让某个任务并发执行的时候，你只需要把这个任务包装成一个函数，开启一个goroutine去执行这个函数就可以了</p>
+<p>当然还有好多好多要学习的地方，道阻且长，道阻且跻，但我一点都不害怕，冲鸭，好开心，感觉离目标有越来越靠近。</p>
+<p>啊啊啊啊，晚上还有阿里的笔试，据说两道题有难度，不知道自己能不能A掉，太慌了，求老天爷保佑，我愿拿十斤肉作为交换。</p>
 
       
 
@@ -229,7 +236,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color2">springboot、Maven</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">go、nimbus</a>
         		</li>
       		
 		</ul>
@@ -241,7 +248,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Maven//" class="article-tag-list-link color1">Maven</a>
+        			<a href="/categories/Intern//" class="article-tag-list-link color2">Intern</a>
         		</li>
       		
 		</ul>
@@ -296,7 +303,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://rochellezsy.github.io/2020/03/23/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%88%90%E5%8A%9F%E5%AE%8C%E6%88%90task/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,18 +317,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          每日debug记录：Maven项目遇到的问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/29/Redis%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86%E4%B8%80/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Redis入门知识（一）</div>
+    <a href="/2020/03/20/GORM%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">GORM学习（20.03.20）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -362,7 +360,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Maven项目搭建遇到的错误分析" data-title="Maven项目搭建遇到的错误分析" data-url="https://rochellezsy.github.io/2020/03/04/Maven%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90/"></div>
+	<div class="ds-thread" data-thread-key="第一次成功完成task" data-title="第一次成功完成项目task" data-url="https://rochellezsy.github.io/2020/03/23/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%88%90%E5%8A%9F%E5%AE%8C%E6%88%90task/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
